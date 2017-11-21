@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "br.com.m2msolutions.copiloto.m2mcopiloto";
+option java_multiple_files = true;
+option java_outer_classname = "CopilotoProto";
+
+service Copiloto{
+    rpc Regular(CopilotoRequest) returns (CopilotoResponse){}
+}
+
+message CopilotoRequest{
+    int32 idCliente = 1;
+    int32 idVeiculo = 2;
+    string idLinha = 3;
+    string idTrajeto = 4;
+    string modeloModulo = 6;
+    string identificadorModulo = 7;
+    int64 dataHoraTransmissao = 8;
+    float percentualConclusao = 9;
+}
+
+message CopilotoResponse{
+    int32 minutosAdiantado = 1;
+}

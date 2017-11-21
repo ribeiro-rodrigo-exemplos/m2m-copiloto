@@ -1,0 +1,84 @@
+apply plugin: 'com.google.protobuf'
+apply plugin: 'idea'
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.1'
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'br.com.m2msolutions.copiloto'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+def grpcVersion = '1.7.0'
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.codehaus.groovy:groovy')
+
+	compile "com.google.api.grpc:proto-google-common-protos:0.1.9"
+	compile "io.grpc:grpc-netty:${grpcVersion}"
+	compile "io.grpc:grpc-protobuf:${grpcVersion}"
+	compile "io.grpc:grpc-stub:${grpcVersion}"
+
+	runtime('org.springframework.boot:spring-boot-devtools')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+	testCompile 'cglib:cglib-nodep:3.2.2'
+}
+
+sourceSets {
+	main {
+		proto {
+			srcDir 'src/main/resources'
+		}
+	}
+}
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.4.0'
+	}
+	plugins {
+		grpc {
+			artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {
+				// To generate deprecated interfaces and static bindService method,
+				// turn the enable_deprecated option to true below:
+				option 'enable_deprecated=false'
+			}
+		}
+	}
+}
+
+idea {
+	module {
+		// Not using generatedSourceDirs because of
+		// https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
+		sourceDirs += file("${projectDir}/build/generated/source/proto/main/java")
+		sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc")
+	}
+}
+
+
