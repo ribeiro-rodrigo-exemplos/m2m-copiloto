@@ -91,6 +91,38 @@ class CopilotoServiceSpec extends Specification {
 
     def "Não deve retornar nada caso o trajeto não exista" () {
 
+        given: "Preparando objeto de requisiçao de regulaçao"
+
+            def request = CopilotoRequest
+                                .newBuilder()
+                                    .setDataHoraTransmissao(agora())
+                                    .setIdCliente(209)
+                                    .setModeloModulo("MAXTRACK")
+                                    .setIdentificadorModulo("129345")
+                                    .setIdLinha("23")
+                                    .setIdTrajeto("Trajeto01")
+                                    .setIdVeiculo(1414)
+                                    .setPercentualConclusao(25)
+                                .build()
+
+        and: "Criando mock do trajeto service retornando um trajeto nulo"
+
+            trajetoService = Mock(TrajetoService){
+                obterTrajeto("23","Trajeto01") >> null
+            }
+
+        and: "Injetando mock do trajetoService no momentoViagemBuilder"
+
+            momentoViagemBuilder.trajetoService = trajetoService
+
+        when: "Copiloto Service recebe requisiçao de regulaçao"
+
+            copilotoService.regular request, streamObserver
+
+        then:
+
+            1 * streamObserver.onCompleted()
+
     }
 
     def "Não deve retornar nada caso o trajeto não possua nenhum algoritmo de regulação configurado" () {
