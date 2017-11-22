@@ -30,6 +30,7 @@ def grpcVersion = '1.7.0'
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.codehaus.groovy:groovy')
 
 	compile "com.google.api.grpc:proto-google-common-protos:0.1.9"

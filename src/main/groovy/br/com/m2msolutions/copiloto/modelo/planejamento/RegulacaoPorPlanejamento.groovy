@@ -1,8 +1,6 @@
 package br.com.m2msolutions.copiloto.modelo.planejamento
 
 import br.com.m2msolutions.copiloto.modelo.Regulacao
-import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
-import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.util.DateUtil
 import groovy.time.TimeCategory
@@ -22,25 +20,25 @@ class RegulacaoPorPlanejamento implements Regulacao {
         if(!situacaoViagem.alocacao)
             return null
 
-        def dataHoraPartida = situacaoViagem.alocacao.momentoDaPartida
-        def dataHoraChegadaPlanejada = situacaoViagem.alocacao.chegadaPlanejada
+        def momentoDaPartida = situacaoViagem.alocacao.momentoDaPartida
+        def momentoPlanejadoDaChegada = situacaoViagem.alocacao.chegadaPlanejada
         def percentualConclusao = situacaoViagem.percentualDeConclusao
-        def dataHoraTransmissao = situacaoViagem.momentoDaTransmissao
+        def momentoDaTransmissao = situacaoViagem.momentoDaTransmissao
 
-        def duracaoEstimadaDoTrajeto = calcularDuracaoEstimadaDoTrajeto dataHoraPartida, dataHoraChegadaPlanejada
+        def duracaoEstimadaDoTrajeto = calcularDuracaoEstimadaDoTrajeto momentoDaPartida, momentoPlanejadoDaChegada
 
-        def tempoGastoPlanejado = calcularTempoGastoPlanejado percentualConclusao, duracaoEstimadaDoTrajeto
+        def tempoGastoIdeal = calcularTempoGastoIdeal percentualConclusao, duracaoEstimadaDoTrajeto
 
-        def tempoGastoReal =  calcularTempoGastoNoTrajeto dataHoraPartida, dataHoraTransmissao
+        def tempoGasto =  calcularTempoGastoNoTrajeto momentoDaPartida, momentoDaTransmissao
 
-        calcularDiferencaComOPlanejado tempoGastoPlanejado, tempoGastoReal
+        dateUtil.calcularDiferenca tempoGasto, tempoGastoIdeal
     }
 
     private TimeDuration calcularDuracaoEstimadaDoTrajeto(Date dataHoraPartida, Date dataHoraChegadaPlanejada){
         dateUtil.calcularDiferenca dataHoraPartida,dataHoraChegadaPlanejada
     }
 
-    private TimeDuration calcularTempoGastoPlanejado(Float percentualConclusao,TimeDuration duracaoEstimadaDoTrajeto){
+    private TimeDuration calcularTempoGastoIdeal(Float percentualConclusao, TimeDuration duracaoEstimadaDoTrajeto){
 
         def tempoTotalEmMinutos = dateUtil.obterDuracaosEmMinutos duracaoEstimadaDoTrajeto
         def tempoIdealParaPosicao = (percentualConclusao / 100 ) * tempoTotalEmMinutos
@@ -54,9 +52,5 @@ class RegulacaoPorPlanejamento implements Regulacao {
 
     private TimeDuration calcularTempoGastoNoTrajeto(Date dataHoraPartida,Date dataHoraTransmissao){
         dateUtil.calcularDiferenca dataHoraPartida, dataHoraTransmissao
-    }
-
-    private TimeDuration calcularDiferencaComOPlanejado(TimeDuration tempoGastoPlanejado,TimeDuration tempoGastoReal){
-        dateUtil.calcularDiferenca tempoGastoReal, tempoGastoPlanejado
     }
 }
