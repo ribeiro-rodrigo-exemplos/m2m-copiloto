@@ -29,20 +29,20 @@ repositories {
 def grpcVersion = '1.7.0'
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
-	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-	compile('org.springframework.boot:spring-boot-starter-cache')
-	compile('org.codehaus.groovy:groovy')
+	compile 'org.springframework.boot:spring-boot-starter'
+	compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	compile 'org.springframework.boot:spring-boot-starter-cache'
+	compile 'org.codehaus.groovy:groovy'
 
-	compile('com.hazelcast:hazelcast:3.9')
-	compile('com.hazelcast:hazelcast-spring')
+	compile 'com.hazelcast:hazelcast:3.9'
+	compile 'com.hazelcast:hazelcast-spring'
 
-	compile "com.google.api.grpc:proto-google-common-protos:0.1.9"
+	compile 'com.google.api.grpc:proto-google-common-protos:0.1.9'
 	compile "io.grpc:grpc-netty:${grpcVersion}"
 	compile "io.grpc:grpc-protobuf:${grpcVersion}"
 	compile "io.grpc:grpc-stub:${grpcVersion}"
 
-	runtime('org.springframework.boot:spring-boot-devtools')
+	runtime 'org.springframework.boot:spring-boot-devtools'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
@@ -69,8 +69,6 @@ protobuf {
 	generateProtoTasks {
 		all()*.plugins {
 			grpc {
-				// To generate deprecated interfaces and static bindService method,
-				// turn the enable_deprecated option to true below:
 				option 'enable_deprecated=false'
 			}
 		}
@@ -79,8 +77,6 @@ protobuf {
 
 idea {
 	module {
-		// Not using generatedSourceDirs because of
-		// https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
 		sourceDirs += file("${projectDir}/build/generated/source/proto/main/java")
 		sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc")
 	}

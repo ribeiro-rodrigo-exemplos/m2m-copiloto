@@ -15,9 +15,9 @@ class CopilotoManagerSpec extends Specification {
         manager = new CopilotoManager(context: context)
     }
 
-    def "Deve resolver regulação por planejamento" (){
+    def 'Deve resolver regulação por planejamento' (){
 
-        when: "Solicitando ao Copiloto Manager o tipo de regulação requisitado"
+        when: 'Solicitando ao Copiloto Manager o tipo de regulação requisitado'
 
             def algoritmo = manager.obterRegulacao TipoRegulacao.PLANEJAMENTO
 
@@ -27,9 +27,9 @@ class CopilotoManagerSpec extends Specification {
             algoritmo.class in RegulacaoPorPlanejamento
     }
 
-    def "Deve disparar exceção se não encontrar a regulação" (){
+    def 'Deve disparar exceção se não encontrar a regulação' (){
 
-        when: "Solicitando ao Copiloto Manager um tipo de regulação inexistente"
+        when: 'Solicitando ao Copiloto Manager um tipo de regulação inexistente'
 
             manager.obterRegulacao TipoRegulacao.PLANEJAMENTO
 

@@ -26,28 +26,28 @@ class MomentoViagemBuilderSpec extends Specification {
         builder = new MomentoViagemBuilder(viagemService: viagemService,trajetoService: trajetoService)
     }
 
-    def "Deve criar momento da viagem" () {
+    def 'Deve criar momento da viagem' () {
 
-        when: "criando momento da viagem"
+        when: 'criando momento da viagem'
 
             MomentoViagem momento = builder
                                         .criarMomento()
                                             .comVeiculo(14)
-                                            .comModulo(new Modulo(modelo: "Maxtrack",identificador:"BTRE"))
+                                            .comModulo(new Modulo(modelo: 'Maxtrack',identificador:'BTRE'))
                                             .comPercentualDeConclusao(25f)
-                                            .noTrajeto("TRAJETO12")
+                                            .noTrajeto('TRAJETO12')
                                             .comPercentualDeConclusao(25f)
-                                            .naLinha("LINHA14")
+                                            .naLinha('LINHA14')
                                             .doCliente(209)
                                             .transmitiuEm(new Date())
                                         .criar()
 
-        then: "O momento deve ser criado com todos os dados configurados"
+        then: 'O momento deve ser criado com todos os dados configurados'
 
             momento.veiculo.veiculoId == 14
-            momento.veiculo.modulo.modelo == "Maxtrack"
-            momento.trajetoId == "TRAJETO12"
-            momento.linhaId == "LINHA14"
+            momento.veiculo.modulo.modelo == 'Maxtrack'
+            momento.trajetoId == 'TRAJETO12'
+            momento.linhaId == 'LINHA14'
             momento.veiculo.clienteId == 209
             momento.percentualDeConclusao == 25f
             momento.momentoDaTransmissao

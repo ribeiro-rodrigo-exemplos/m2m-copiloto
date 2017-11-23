@@ -23,9 +23,12 @@ class TrajetoRepository{
         linhaId = new ObjectId(linhaId as String)
         trajetoId = new ObjectId(trajetoId as String)
 
-        Criteria match = Criteria.where("id").is(linhaId)
+        Criteria match = Criteria.where("id")
+                                    .is(linhaId)
 
-        Criteria projection = Criteria.where("trajetos").elemMatch(Criteria.where("trajetoId").is(trajetoId))
+        Criteria projection = Criteria.where("trajetos")
+                                        .elemMatch(Criteria.where("trajetoId")
+                                        .is(trajetoId))
 
         BasicQuery query = new BasicQuery(match.getCriteriaObject(),projection.getCriteriaObject())
 
