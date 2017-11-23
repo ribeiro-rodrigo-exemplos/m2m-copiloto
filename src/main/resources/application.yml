@@ -1,0 +1,7 @@
+spring:
+  data:
+    mongodb:
+      database: frota_znh
+      host: localhost
+
+logging.level.org.springframework.data.mongodb.core.MongoTemplate: DEBUG

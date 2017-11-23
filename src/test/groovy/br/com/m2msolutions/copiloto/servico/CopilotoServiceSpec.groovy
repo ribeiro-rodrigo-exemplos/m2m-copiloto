@@ -27,7 +27,6 @@ class CopilotoServiceSpec extends Specification {
 
     void setup(){
 
-
         copilotoManager = Mock CopilotoManager
         reguladorDeViagem = Mock ReguladorDeViagem
         regulacao = Mock RegulacaoPorPlanejamento

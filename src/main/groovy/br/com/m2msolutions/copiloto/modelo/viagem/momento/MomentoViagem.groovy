@@ -45,7 +45,6 @@ class MomentoViagem {
     Trajeto getTrajeto(){
         trajetoService.obterTrajeto linhaId, trajetoId
     }
-
 }
 
 

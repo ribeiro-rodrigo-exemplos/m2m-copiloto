@@ -31,7 +31,11 @@ def grpcVersion = '1.7.0'
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.codehaus.groovy:groovy')
+
+	compile('com.hazelcast:hazelcast:3.9')
+	compile('com.hazelcast:hazelcast-spring')
 
 	compile "com.google.api.grpc:proto-google-common-protos:0.1.9"
 	compile "io.grpc:grpc-netty:${grpcVersion}"
