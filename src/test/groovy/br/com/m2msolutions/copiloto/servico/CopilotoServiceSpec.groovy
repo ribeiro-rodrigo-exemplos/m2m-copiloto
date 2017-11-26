@@ -8,7 +8,7 @@ import br.com.m2msolutions.copiloto.modelo.planejamento.RegulacaoPorPlanejamento
 import br.com.m2msolutions.copiloto.modelo.viagem.ReguladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
-import br.com.m2msolutions.copiloto.util.DateUtil
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import io.grpc.stub.StreamObserver
 import spock.lang.Specification
 
@@ -21,7 +21,7 @@ class CopilotoServiceSpec extends Specification {
     Regulacao regulacao
     MomentoViagemBuilder momentoViagemBuilder
 
-    DateUtil dateUtil
+    DateHelper dateUtil
 
     StreamObserver streamObserver
 
@@ -35,11 +35,11 @@ class CopilotoServiceSpec extends Specification {
 
         momentoViagemBuilder = new MomentoViagemBuilder()
 
-        dateUtil = new DateUtil()
+        dateUtil = new DateHelper()
         copilotoService = new CopilotoService(
                 manager: copilotoManager,
                 momentoViagemBuilder: momentoViagemBuilder,
-                dateUtil: new DateUtil(),
+                dateUtil: new DateHelper(),
                 reguladorDeViagem: reguladorDeViagem
         )
     }

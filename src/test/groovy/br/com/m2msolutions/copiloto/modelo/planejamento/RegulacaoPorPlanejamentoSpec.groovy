@@ -6,7 +6,7 @@ import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.servico.ViagemService
-import br.com.m2msolutions.copiloto.util.DateUtil
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import groovy.time.TimeDuration
 import spock.lang.Specification
 
@@ -18,7 +18,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
     ViagemService viagemService
 
     RegulacaoPorPlanejamento regulacao
-    DateUtil dateUtil
+    DateHelper dateUtil
 
     def setup(){
 
@@ -28,7 +28,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         momentoBuilder = new MomentoViagemBuilder(viagemService: viagemService)
         transmissaoBuilder = new TransmissaoBuilder()
 
-        dateUtil = new DateUtil()
+        dateUtil = new DateHelper()
 
         regulacao = new RegulacaoPorPlanejamento(dateUtil: dateUtil)
 

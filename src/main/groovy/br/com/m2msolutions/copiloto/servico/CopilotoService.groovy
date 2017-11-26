@@ -8,7 +8,7 @@ import br.com.m2msolutions.copiloto.modelo.viagem.ReguladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
-import br.com.m2msolutions.copiloto.util.DateUtil
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import io.grpc.stub.StreamObserver
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -23,7 +23,7 @@ class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
     @Autowired
     ReguladorDeViagem reguladorDeViagem
     @Autowired
-    DateUtil dateUtil
+    DateHelper dateUtil
 
     @Override
     void regular(CopilotoRequest request, StreamObserver<CopilotoResponse> responseObserver) {

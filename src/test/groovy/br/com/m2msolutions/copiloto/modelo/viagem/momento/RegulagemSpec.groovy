@@ -1,7 +1,7 @@
 package br.com.m2msolutions.copiloto.modelo.viagem.momento
 
 import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
-import br.com.m2msolutions.copiloto.util.DateUtil
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
 import spock.lang.Specification
@@ -11,10 +11,10 @@ import spock.lang.Specification
  */
 class RegulagemSpec extends Specification{
 
-    DateUtil dateUtil
+    DateHelper dateUtil
 
     void setup(){
-        dateUtil = new DateUtil()
+        dateUtil = new DateHelper()
     }
 
     def 'Deve calcular prumo com atraso de 1 minuto' () {

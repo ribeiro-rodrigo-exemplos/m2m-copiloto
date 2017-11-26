@@ -2,7 +2,7 @@ package br.com.m2msolutions.copiloto.modelo.planejamento
 
 import br.com.m2msolutions.copiloto.modelo.Regulacao
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
-import br.com.m2msolutions.copiloto.util.DateUtil
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 class RegulacaoPorPlanejamento implements Regulacao {
 
     @Autowired
-    DateUtil dateUtil
+    DateHelper dateUtil
 
     @Override
     TimeDuration regular(MomentoViagem situacaoViagem) {

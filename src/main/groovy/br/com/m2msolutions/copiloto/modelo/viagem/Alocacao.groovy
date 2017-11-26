@@ -1,6 +1,7 @@
 package br.com.m2msolutions.copiloto.modelo.viagem
 
-class Alocacao {
+class Alocacao{
+
     Date partidaPlanejada
     Date chegadaPlanejada
     Date momentoDaPartida

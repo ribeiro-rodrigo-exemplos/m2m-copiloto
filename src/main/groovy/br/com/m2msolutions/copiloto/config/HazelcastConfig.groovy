@@ -1,8 +1,10 @@
 package br.com.m2msolutions.copiloto.config
 
-import com.hazelcast.config.Config
-import com.hazelcast.config.EvictionPolicy
-import com.hazelcast.config.MapConfig
+import br.com.m2msolutions.copiloto.helpers.hazelcast.portable.CopilotoPortableFactory
+import com.hazelcast.client.HazelcastClient
+import com.hazelcast.client.config.ClientConfig
+import com.hazelcast.core.HazelcastInstance
+import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -10,18 +12,36 @@ import org.springframework.context.annotation.Configuration
  * Created by rodrigo on 23/11/17.
  */
 @Configuration
+@ConfigurationProperties(prefix = 'hazelcast')
 class HazelcastConfig {
 
-    static final String ALOCACAO_CACHE = 'alocacao'
+    def instances = []
 
     @Bean
-    Config hazelcastConfig(){
-        new Config()
-                .addMapConfig(
-                    new MapConfig()
-                        .setName(ALOCACAO_CACHE)
-                        .setEvictionPolicy(EvictionPolicy.LRU)
-                        .setTimeToLiveSeconds(2400)
-        )
+    CopilotoPortableFactory copilotoPortableFactory(){
+        new CopilotoPortableFactory()
+    }
+
+    @Bean
+    ClientConfig clientConfig(){
+
+        def config = new ClientConfig()
+
+        config.getNetworkConfig()
+                    .addAddress(*instances)
+
+        config.getGroupConfig()
+                .setName("dev")
+                .setPassword("dev-pass")
+
+        config.getSerializationConfig()
+                .addPortableFactory(1,copilotoPortableFactory())
+
+        config
+    }
+
+    @Bean
+    HazelcastInstance hazelcastInstance(){
+        HazelcastClient.newHazelcastClient(clientConfig())
     }
 }

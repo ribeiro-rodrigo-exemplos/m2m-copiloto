@@ -4,4 +4,12 @@ spring:
       database: frota_znh
       host: localhost
 
+grpc:
+  port: 6565
+
+hazelcast:
+  instances:
+    - localhost:5701
+
+
 logging.level.org.springframework.data.mongodb.core.MongoTemplate: DEBUG
