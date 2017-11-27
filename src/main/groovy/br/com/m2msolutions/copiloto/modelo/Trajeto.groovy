@@ -9,6 +9,6 @@ class Trajeto {
 
     @Id
     String trajetoId
-    @Field("algoritmoCopiloto")
+    @Field("copilotoAlgoritmo")
     TipoRegulacao tipoRegulacao
 }
