@@ -1,11 +1,13 @@
 package br.com.m2msolutions.copiloto.servico
 
 import br.com.m2msolutions.copiloto.grpc.CopilotoGrpc
-import br.com.m2msolutions.copiloto.grpc.CopilotoRequest
-import br.com.m2msolutions.copiloto.grpc.CopilotoResponse
+import br.com.m2msolutions.copiloto.grpc.RegulagemRequest
+import br.com.m2msolutions.copiloto.grpc.RegulagemResponse
+import br.com.m2msolutions.copiloto.grpc.RegulagemResult
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.ReguladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
+import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.helpers.DateHelper
@@ -26,7 +28,7 @@ class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
     DateHelper dateUtil
 
     @Override
-    void regular(CopilotoRequest request, StreamObserver<CopilotoResponse> responseObserver) {
+    void regular(RegulagemRequest request, StreamObserver<RegulagemResponse> responseObserver) {
 
         MomentoViagem momentoViagem = criarMomentoDaViagem request
 
@@ -34,14 +36,23 @@ class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
 
         if(trajeto && trajeto.tipoRegulacao){
             def algoritmoDeRegulacao = manager.obterRegulacao trajeto.tipoRegulacao
-            def regulagem = reguladorDeViagem.regular momentoViagem, algoritmoDeRegulacao
-            responseObserver.onNext(criarResposta(regulagem))
+
+            try{
+
+                def regulagem = reguladorDeViagem.regular momentoViagem, algoritmoDeRegulacao
+                responseObserver.onNext(criarResposta(regulagem))
+
+            }catch (RegulagemException e){
+                responseObserver.onNext(criarResposta(null))
+            }
         }
+        else
+            responseObserver.onNext(criarRespostaEmBranco())
 
         responseObserver.onCompleted()
     }
 
-    private MomentoViagem criarMomentoDaViagem(CopilotoRequest request){
+    private MomentoViagem criarMomentoDaViagem(RegulagemRequest request){
         momentoViagemBuilder
                 .criarMomento()
                     .naLinha(request.getIdLinha())
@@ -54,10 +65,22 @@ class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
                 .criar()
     }
 
-    private CopilotoResponse criarResposta(Regulagem regulagem){
-        CopilotoResponse
+    private RegulagemResponse criarResposta(Regulagem regulagem){
+
+        RegulagemResult result = RegulagemResult.newBuilder()
+                                                .setMinutosAdiantado(regulagem ? regulagem.tempoReguladoEmMinutos() : 0)
+                                                .setRegulagemRealizada(regulagem != null)
+                                                .build()
+        RegulagemResponse
                 .newBuilder()
-                .setMinutosAdiantado(regulagem?.tempoReguladoEmMinutos())
+                .setResult(result)
+                .setCopilotoHabilitado(true)
+                .build()
+    }
+
+    private RegulagemResponse criarRespostaEmBranco(){
+        RegulagemResponse
+                .newBuilder()
                 .build()
     }
 }

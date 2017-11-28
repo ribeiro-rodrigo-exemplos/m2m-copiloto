@@ -28,16 +28,16 @@ public final class CopilotoGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<br.com.m2msolutions.copiloto.grpc.CopilotoRequest,
-      br.com.m2msolutions.copiloto.grpc.CopilotoResponse> METHOD_REGULAR =
-      io.grpc.MethodDescriptor.<br.com.m2msolutions.copiloto.grpc.CopilotoRequest, br.com.m2msolutions.copiloto.grpc.CopilotoResponse>newBuilder()
+  public static final io.grpc.MethodDescriptor<br.com.m2msolutions.copiloto.grpc.RegulagemRequest,
+      br.com.m2msolutions.copiloto.grpc.RegulagemResponse> METHOD_REGULAR =
+      io.grpc.MethodDescriptor.<br.com.m2msolutions.copiloto.grpc.RegulagemRequest, br.com.m2msolutions.copiloto.grpc.RegulagemResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "Copiloto", "Regular"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              br.com.m2msolutions.copiloto.grpc.CopilotoRequest.getDefaultInstance()))
+              br.com.m2msolutions.copiloto.grpc.RegulagemRequest.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              br.com.m2msolutions.copiloto.grpc.CopilotoResponse.getDefaultInstance()))
+              br.com.m2msolutions.copiloto.grpc.RegulagemResponse.getDefaultInstance()))
           .setSchemaDescriptor(new CopilotoMethodDescriptorSupplier("Regular"))
           .build();
 
@@ -70,8 +70,8 @@ public final class CopilotoGrpc {
 
     /**
      */
-    public void regular(br.com.m2msolutions.copiloto.grpc.CopilotoRequest request,
-        io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.CopilotoResponse> responseObserver) {
+    public void regular(br.com.m2msolutions.copiloto.grpc.RegulagemRequest request,
+        io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.RegulagemResponse> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_REGULAR, responseObserver);
     }
 
@@ -81,8 +81,8 @@ public final class CopilotoGrpc {
             METHOD_REGULAR,
             asyncUnaryCall(
               new MethodHandlers<
-                br.com.m2msolutions.copiloto.grpc.CopilotoRequest,
-                br.com.m2msolutions.copiloto.grpc.CopilotoResponse>(
+                br.com.m2msolutions.copiloto.grpc.RegulagemRequest,
+                br.com.m2msolutions.copiloto.grpc.RegulagemResponse>(
                   this, METHODID_REGULAR)))
           .build();
     }
@@ -108,8 +108,8 @@ public final class CopilotoGrpc {
 
     /**
      */
-    public void regular(br.com.m2msolutions.copiloto.grpc.CopilotoRequest request,
-        io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.CopilotoResponse> responseObserver) {
+    public void regular(br.com.m2msolutions.copiloto.grpc.RegulagemRequest request,
+        io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.RegulagemResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_REGULAR, getCallOptions()), request, responseObserver);
     }
@@ -135,7 +135,7 @@ public final class CopilotoGrpc {
 
     /**
      */
-    public br.com.m2msolutions.copiloto.grpc.CopilotoResponse regular(br.com.m2msolutions.copiloto.grpc.CopilotoRequest request) {
+    public br.com.m2msolutions.copiloto.grpc.RegulagemResponse regular(br.com.m2msolutions.copiloto.grpc.RegulagemRequest request) {
       return blockingUnaryCall(
           getChannel(), METHOD_REGULAR, getCallOptions(), request);
     }
@@ -161,8 +161,8 @@ public final class CopilotoGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<br.com.m2msolutions.copiloto.grpc.CopilotoResponse> regular(
-        br.com.m2msolutions.copiloto.grpc.CopilotoRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<br.com.m2msolutions.copiloto.grpc.RegulagemResponse> regular(
+        br.com.m2msolutions.copiloto.grpc.RegulagemRequest request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_REGULAR, getCallOptions()), request);
     }
@@ -188,8 +188,8 @@ public final class CopilotoGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_REGULAR:
-          serviceImpl.regular((br.com.m2msolutions.copiloto.grpc.CopilotoRequest) request,
-              (io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.CopilotoResponse>) responseObserver);
+          serviceImpl.regular((br.com.m2msolutions.copiloto.grpc.RegulagemRequest) request,
+              (io.grpc.stub.StreamObserver<br.com.m2msolutions.copiloto.grpc.RegulagemResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();

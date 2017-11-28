@@ -3,8 +3,8 @@
 
 package br.com.m2msolutions.copiloto.grpc;
 
-public interface CopilotoRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:CopilotoRequest)
+public interface RegulagemRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:RegulagemRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**

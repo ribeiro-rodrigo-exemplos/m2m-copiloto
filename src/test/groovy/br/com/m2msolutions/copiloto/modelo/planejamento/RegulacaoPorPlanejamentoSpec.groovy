@@ -3,6 +3,7 @@ package br.com.m2msolutions.copiloto.modelo.planejamento
 import br.com.m2msolutions.copiloto.builder.AlocacaoBuilder
 import br.com.m2msolutions.copiloto.builder.TransmissaoBuilder
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
+import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.servico.ViagemService
@@ -188,6 +189,45 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
             (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
             0 == emMinutos(tempoRegulado)
+    }
+
+    def "Não deve realizar regulagem sem alocação de viagem" (){
+
+        given: 'Criando alocação da viagem'
+
+            def alocacao = alocacaoBuilder
+                                .planejadaPara(new Date())
+                                .comMinutosDeDuracao(60)
+                                .iniciouComMinutosDeAtraso(10)
+                                .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                    .emViagemComAlocacao(alocacao)
+                    .transmitiuAposMinutosDeViagem(25)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                        .criarMomento()
+                                        .naLinha('Linha12')
+                                        .doCliente(209)
+                                        .noTrajeto('TRAJETO12')
+                                        .comPercentualDeConclusao(50)
+                                        .comVeiculo(1212)
+                                        .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                        .transmitiuEm(momentoDaTransmissao)
+                                        .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            regulacao.regular momento
+
+        then:
+
+            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> null
+            thrown(RegulagemException)
     }
 
     private Integer emMinutos(TimeDuration duration){

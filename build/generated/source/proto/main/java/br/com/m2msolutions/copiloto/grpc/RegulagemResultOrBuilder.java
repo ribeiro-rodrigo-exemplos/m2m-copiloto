@@ -3,12 +3,17 @@
 
 package br.com.m2msolutions.copiloto.grpc;
 
-public interface CopilotoResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:CopilotoResponse)
+public interface RegulagemResultOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:RegulagemResult)
     com.google.protobuf.MessageOrBuilder {
 
   /**
    * <code>int32 minutosAdiantado = 1;</code>
    */
   int getMinutosAdiantado();
+
+  /**
+   * <code>bool regulagemRealizada = 2;</code>
+   */
+  boolean getRegulagemRealizada();
 }

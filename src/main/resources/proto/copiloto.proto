@@ -5,10 +5,10 @@ option java_multiple_files = true;
 option java_outer_classname = "CopilotoProto";
 
 service Copiloto{
-    rpc Regular(CopilotoRequest) returns (CopilotoResponse){}
+    rpc Regular(RegulagemRequest) returns (RegulagemResponse){}
 }
 
-message CopilotoRequest{
+message RegulagemRequest{
     int32 idCliente = 1;
     int32 idVeiculo = 2;
     string idLinha = 3;
@@ -19,6 +19,12 @@ message CopilotoRequest{
     float percentualConclusao = 9;
 }
 
-message CopilotoResponse{
+message RegulagemResponse{
+    RegulagemResult result = 1;
+    bool copilotoHabilitado = 2;
+}
+
+message RegulagemResult{
     int32 minutosAdiantado = 1;
+    bool regulagemRealizada = 2;
 }

@@ -4,19 +4,20 @@
 package br.com.m2msolutions.copiloto.grpc;
 
 /**
- * Protobuf type {@code CopilotoResponse}
+ * Protobuf type {@code RegulagemResult}
  */
-public  final class CopilotoResponse extends
+public  final class RegulagemResult extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:CopilotoResponse)
-    CopilotoResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:RegulagemResult)
+    RegulagemResultOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use CopilotoResponse.newBuilder() to construct.
-  private CopilotoResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use RegulagemResult.newBuilder() to construct.
+  private RegulagemResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private CopilotoResponse() {
+  private RegulagemResult() {
     minutosAdiantado_ = 0;
+    regulagemRealizada_ = false;
   }
 
   @java.lang.Override
@@ -24,7 +25,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private CopilotoResponse(
+  private RegulagemResult(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -52,6 +53,11 @@ private static final long serialVersionUID = 0L;
             minutosAdiantado_ = input.readInt32();
             break;
           }
+          case 16: {
+
+            regulagemRealizada_ = input.readBool();
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -66,14 +72,14 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_CopilotoResponse_descriptor;
+    return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_RegulagemResult_descriptor;
   }
 
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_CopilotoResponse_fieldAccessorTable
+    return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_RegulagemResult_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            br.com.m2msolutions.copiloto.grpc.CopilotoResponse.class, br.com.m2msolutions.copiloto.grpc.CopilotoResponse.Builder.class);
+            br.com.m2msolutions.copiloto.grpc.RegulagemResult.class, br.com.m2msolutions.copiloto.grpc.RegulagemResult.Builder.class);
   }
 
   public static final int MINUTOSADIANTADO_FIELD_NUMBER = 1;
@@ -83,6 +89,15 @@ private static final long serialVersionUID = 0L;
    */
   public int getMinutosAdiantado() {
     return minutosAdiantado_;
+  }
+
+  public static final int REGULAGEMREALIZADA_FIELD_NUMBER = 2;
+  private boolean regulagemRealizada_;
+  /**
+   * <code>bool regulagemRealizada = 2;</code>
+   */
+  public boolean getRegulagemRealizada() {
+    return regulagemRealizada_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -100,6 +115,9 @@ private static final long serialVersionUID = 0L;
     if (minutosAdiantado_ != 0) {
       output.writeInt32(1, minutosAdiantado_);
     }
+    if (regulagemRealizada_ != false) {
+      output.writeBool(2, regulagemRealizada_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -112,6 +130,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, minutosAdiantado_);
     }
+    if (regulagemRealizada_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, regulagemRealizada_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -122,14 +144,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof br.com.m2msolutions.copiloto.grpc.CopilotoResponse)) {
+    if (!(obj instanceof br.com.m2msolutions.copiloto.grpc.RegulagemResult)) {
       return super.equals(obj);
     }
-    br.com.m2msolutions.copiloto.grpc.CopilotoResponse other = (br.com.m2msolutions.copiloto.grpc.CopilotoResponse) obj;
+    br.com.m2msolutions.copiloto.grpc.RegulagemResult other = (br.com.m2msolutions.copiloto.grpc.RegulagemResult) obj;
 
     boolean result = true;
     result = result && (getMinutosAdiantado()
         == other.getMinutosAdiantado());
+    result = result && (getRegulagemRealizada()
+        == other.getRegulagemRealizada());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -143,74 +167,77 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + MINUTOSADIANTADO_FIELD_NUMBER;
     hash = (53 * hash) + getMinutosAdiantado();
+    hash = (37 * hash) + REGULAGEMREALIZADA_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getRegulagemRealizada());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(byte[] data)
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(java.io.InputStream input)
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseDelimitedFrom(java.io.InputStream input)
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseDelimitedFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse parseFrom(
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -222,7 +249,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(br.com.m2msolutions.copiloto.grpc.CopilotoResponse prototype) {
+  public static Builder newBuilder(br.com.m2msolutions.copiloto.grpc.RegulagemResult prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   public Builder toBuilder() {
@@ -237,25 +264,25 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code CopilotoResponse}
+   * Protobuf type {@code RegulagemResult}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:CopilotoResponse)
-      br.com.m2msolutions.copiloto.grpc.CopilotoResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:RegulagemResult)
+      br.com.m2msolutions.copiloto.grpc.RegulagemResultOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_CopilotoResponse_descriptor;
+      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_RegulagemResult_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_CopilotoResponse_fieldAccessorTable
+      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_RegulagemResult_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              br.com.m2msolutions.copiloto.grpc.CopilotoResponse.class, br.com.m2msolutions.copiloto.grpc.CopilotoResponse.Builder.class);
+              br.com.m2msolutions.copiloto.grpc.RegulagemResult.class, br.com.m2msolutions.copiloto.grpc.RegulagemResult.Builder.class);
     }
 
-    // Construct using br.com.m2msolutions.copiloto.grpc.CopilotoResponse.newBuilder()
+    // Construct using br.com.m2msolutions.copiloto.grpc.RegulagemResult.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -274,29 +301,32 @@ private static final long serialVersionUID = 0L;
       super.clear();
       minutosAdiantado_ = 0;
 
+      regulagemRealizada_ = false;
+
       return this;
     }
 
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_CopilotoResponse_descriptor;
+      return br.com.m2msolutions.copiloto.grpc.CopilotoProto.internal_static_RegulagemResult_descriptor;
     }
 
-    public br.com.m2msolutions.copiloto.grpc.CopilotoResponse getDefaultInstanceForType() {
-      return br.com.m2msolutions.copiloto.grpc.CopilotoResponse.getDefaultInstance();
+    public br.com.m2msolutions.copiloto.grpc.RegulagemResult getDefaultInstanceForType() {
+      return br.com.m2msolutions.copiloto.grpc.RegulagemResult.getDefaultInstance();
     }
 
-    public br.com.m2msolutions.copiloto.grpc.CopilotoResponse build() {
-      br.com.m2msolutions.copiloto.grpc.CopilotoResponse result = buildPartial();
+    public br.com.m2msolutions.copiloto.grpc.RegulagemResult build() {
+      br.com.m2msolutions.copiloto.grpc.RegulagemResult result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    public br.com.m2msolutions.copiloto.grpc.CopilotoResponse buildPartial() {
-      br.com.m2msolutions.copiloto.grpc.CopilotoResponse result = new br.com.m2msolutions.copiloto.grpc.CopilotoResponse(this);
+    public br.com.m2msolutions.copiloto.grpc.RegulagemResult buildPartial() {
+      br.com.m2msolutions.copiloto.grpc.RegulagemResult result = new br.com.m2msolutions.copiloto.grpc.RegulagemResult(this);
       result.minutosAdiantado_ = minutosAdiantado_;
+      result.regulagemRealizada_ = regulagemRealizada_;
       onBuilt();
       return result;
     }
@@ -328,18 +358,21 @@ private static final long serialVersionUID = 0L;
       return (Builder) super.addRepeatedField(field, value);
     }
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof br.com.m2msolutions.copiloto.grpc.CopilotoResponse) {
-        return mergeFrom((br.com.m2msolutions.copiloto.grpc.CopilotoResponse)other);
+      if (other instanceof br.com.m2msolutions.copiloto.grpc.RegulagemResult) {
+        return mergeFrom((br.com.m2msolutions.copiloto.grpc.RegulagemResult)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(br.com.m2msolutions.copiloto.grpc.CopilotoResponse other) {
-      if (other == br.com.m2msolutions.copiloto.grpc.CopilotoResponse.getDefaultInstance()) return this;
+    public Builder mergeFrom(br.com.m2msolutions.copiloto.grpc.RegulagemResult other) {
+      if (other == br.com.m2msolutions.copiloto.grpc.RegulagemResult.getDefaultInstance()) return this;
       if (other.getMinutosAdiantado() != 0) {
         setMinutosAdiantado(other.getMinutosAdiantado());
+      }
+      if (other.getRegulagemRealizada() != false) {
+        setRegulagemRealizada(other.getRegulagemRealizada());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -354,11 +387,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      br.com.m2msolutions.copiloto.grpc.CopilotoResponse parsedMessage = null;
+      br.com.m2msolutions.copiloto.grpc.RegulagemResult parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (br.com.m2msolutions.copiloto.grpc.CopilotoResponse) e.getUnfinishedMessage();
+        parsedMessage = (br.com.m2msolutions.copiloto.grpc.RegulagemResult) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -393,6 +426,32 @@ private static final long serialVersionUID = 0L;
       onChanged();
       return this;
     }
+
+    private boolean regulagemRealizada_ ;
+    /**
+     * <code>bool regulagemRealizada = 2;</code>
+     */
+    public boolean getRegulagemRealizada() {
+      return regulagemRealizada_;
+    }
+    /**
+     * <code>bool regulagemRealizada = 2;</code>
+     */
+    public Builder setRegulagemRealizada(boolean value) {
+      
+      regulagemRealizada_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool regulagemRealizada = 2;</code>
+     */
+    public Builder clearRegulagemRealizada() {
+      
+      regulagemRealizada_ = false;
+      onChanged();
+      return this;
+    }
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
@@ -404,39 +463,39 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:CopilotoResponse)
+    // @@protoc_insertion_point(builder_scope:RegulagemResult)
   }
 
-  // @@protoc_insertion_point(class_scope:CopilotoResponse)
-  private static final br.com.m2msolutions.copiloto.grpc.CopilotoResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:RegulagemResult)
+  private static final br.com.m2msolutions.copiloto.grpc.RegulagemResult DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new br.com.m2msolutions.copiloto.grpc.CopilotoResponse();
+    DEFAULT_INSTANCE = new br.com.m2msolutions.copiloto.grpc.RegulagemResult();
   }
 
-  public static br.com.m2msolutions.copiloto.grpc.CopilotoResponse getDefaultInstance() {
+  public static br.com.m2msolutions.copiloto.grpc.RegulagemResult getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<CopilotoResponse>
-      PARSER = new com.google.protobuf.AbstractParser<CopilotoResponse>() {
-    public CopilotoResponse parsePartialFrom(
+  private static final com.google.protobuf.Parser<RegulagemResult>
+      PARSER = new com.google.protobuf.AbstractParser<RegulagemResult>() {
+    public RegulagemResult parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-        return new CopilotoResponse(input, extensionRegistry);
+        return new RegulagemResult(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<CopilotoResponse> parser() {
+  public static com.google.protobuf.Parser<RegulagemResult> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<CopilotoResponse> getParserForType() {
+  public com.google.protobuf.Parser<RegulagemResult> getParserForType() {
     return PARSER;
   }
 
-  public br.com.m2msolutions.copiloto.grpc.CopilotoResponse getDefaultInstanceForType() {
+  public br.com.m2msolutions.copiloto.grpc.RegulagemResult getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
