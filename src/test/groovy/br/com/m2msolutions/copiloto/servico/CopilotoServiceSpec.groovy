@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.m2mcopiloto.CopilotoRequest
+import br.com.m2msolutions.copiloto.grpc.CopilotoRequest
 import br.com.m2msolutions.copiloto.modelo.Regulacao
 import br.com.m2msolutions.copiloto.modelo.TipoRegulacao
 import br.com.m2msolutions.copiloto.modelo.Trajeto

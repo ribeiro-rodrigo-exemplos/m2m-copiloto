@@ -1,8 +1,8 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.m2mcopiloto.CopilotoGrpc
-import br.com.m2msolutions.copiloto.m2mcopiloto.CopilotoRequest
-import br.com.m2msolutions.copiloto.m2mcopiloto.CopilotoResponse
+import br.com.m2msolutions.copiloto.grpc.CopilotoGrpc
+import br.com.m2msolutions.copiloto.grpc.CopilotoRequest
+import br.com.m2msolutions.copiloto.grpc.CopilotoResponse
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.ReguladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem

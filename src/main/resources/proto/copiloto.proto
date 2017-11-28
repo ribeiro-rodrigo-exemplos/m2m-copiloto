@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "br.com.m2msolutions.copiloto.m2mcopiloto";
+option java_package = "br.com.m2msolutions.copiloto.grpc";
 option java_multiple_files = true;
 option java_outer_classname = "CopilotoProto";
 
