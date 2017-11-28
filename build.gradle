@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 apply plugin: 'com.google.protobuf'
 apply plugin: 'idea'
 
@@ -19,7 +21,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 group = 'br.com.m2msolutions.copiloto'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
@@ -83,6 +85,26 @@ idea {
 		sourceDirs += file("${projectDir}/build/generated/source/proto/main/java")
 		sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc")
 	}
+}
+
+processResources {
+	with copySpec {
+		from 'src/main/resources'
+		include '**/application*.yml'
+		include '**/application*.yaml'
+		include '**/application*.properties'
+		project.properties.findAll().each {
+			prop ->
+				if (prop.value != null) {
+					filter(ReplaceTokens, tokens: [ (prop.key): prop.value])
+					filter(ReplaceTokens, tokens: [ ('project.' + prop.key): prop.value])
+				}
+		}
+	}
+}
+
+bootRun {
+	systemProperties = System.properties
 }
 
 
