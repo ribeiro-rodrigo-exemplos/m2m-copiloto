@@ -1,4 +1,13 @@
+application:
+  name: @name@
+  version: @version@
+
 spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+  application:
+    name: ${application.name}
   data:
     mongodb:
       database: frota_znh
@@ -7,9 +16,13 @@ spring:
 grpc:
   port: 6565
 
+logging:
+  path: log
+  maxHistory: 30
+  fileSize: 1MB
+
 hazelcast:
   instances:
     - localhost:5701
-
 
 logging.level.org.springframework.data.mongodb.core.MongoTemplate: DEBUG
