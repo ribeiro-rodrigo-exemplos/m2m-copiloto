@@ -8,7 +8,8 @@ class AlocacaoPortable implements Portable {
 
     String partida
     String chegada
-    String aberturaViagem
+    Long dataTransmissao
+    Integer idVeiculo
 
     @Override
     int getFactoryId() {
@@ -24,13 +25,15 @@ class AlocacaoPortable implements Portable {
     void writePortable(PortableWriter writer) throws IOException {
         writer.writeUTF 'partida', partida
         writer.writeUTF 'chegada', chegada
-        writer.writeUTF 'aberturaViagem',aberturaViagem
+        writer.writeLong 'dataTransmissao',dataTransmissao
+        writer.writeInt 'idVeiculo', idVeiculo
     }
 
     @Override
     void readPortable(PortableReader reader) throws IOException {
         partida = reader.readUTF 'partida'
         chegada = reader.readUTF 'chegada'
-        aberturaViagem = reader.readUTF 'aberturaViagem'
+        dataTransmissao = reader.readLong 'dataTransmissao'
+        idVeiculo = reader.readInt 'idVeiculo'
     }
 }
