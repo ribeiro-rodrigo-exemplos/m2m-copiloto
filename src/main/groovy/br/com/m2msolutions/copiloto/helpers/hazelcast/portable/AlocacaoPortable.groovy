@@ -1,10 +1,10 @@
 package br.com.m2msolutions.copiloto.helpers.hazelcast.portable
 
-import com.hazelcast.nio.serialization.Portable
 import com.hazelcast.nio.serialization.PortableReader
 import com.hazelcast.nio.serialization.PortableWriter
+import com.hazelcast.nio.serialization.VersionedPortable
 
-class AlocacaoPortable implements Portable {
+class AlocacaoPortable implements VersionedPortable {
 
     String partida
     String chegada
@@ -18,6 +18,11 @@ class AlocacaoPortable implements Portable {
 
     @Override
     int getClassId() {
+        return 1
+    }
+
+    @Override
+    int getClassVersion() {
         return 1
     }
 
