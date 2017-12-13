@@ -25,6 +25,7 @@ version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 	jcenter()
 }
@@ -41,6 +42,8 @@ dependencies {
 	compile 'com.hazelcast:hazelcast:3.9'
 	compile 'com.hazelcast:hazelcast-client:3.9'
 	compile 'com.hazelcast:hazelcast-spring'
+
+	compile 'br.com.m2msolutions.copiloto:copiloto-led:1.0.0-SNAPSHOT'
 
 	compile 'com.google.api.grpc:proto-google-common-protos:0.1.9'
 	compile "io.grpc:grpc-netty:${grpcVersion}"
