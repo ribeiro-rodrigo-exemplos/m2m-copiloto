@@ -6,6 +6,8 @@ import groovy.time.TimeDuration
 class Regulagem {
 
     TimeDuration tempoRegulado
+    Date momentoDaRegulagem = new Date()
+
     private DateHelper dateUtil
 
     Integer tempoReguladoEmMinutos(){

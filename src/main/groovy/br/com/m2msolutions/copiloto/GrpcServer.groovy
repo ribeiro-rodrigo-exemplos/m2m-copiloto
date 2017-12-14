@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto
 
-import br.com.m2msolutions.copiloto.servico.CopilotoService
+import br.com.m2msolutions.copiloto.servico.RegulagemService
 import io.grpc.Server
 import io.grpc.ServerBuilder
 import org.slf4j.Logger
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class GrpcServer {
 
     @Autowired
-    CopilotoService copilotoService
+    RegulagemService copilotoService
     Server server
 
     @Value('${grpc.port}')

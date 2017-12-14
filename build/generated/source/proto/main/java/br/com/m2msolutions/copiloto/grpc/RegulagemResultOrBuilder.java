@@ -8,12 +8,17 @@ public interface RegulagemResultOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 minutosAdiantado = 1;</code>
+   * <code>double tempoRegulado = 1;</code>
    */
-  int getMinutosAdiantado();
+  double getTempoRegulado();
 
   /**
-   * <code>bool regulagemRealizada = 2;</code>
+   * <code>int64 dataHoraRegulagem = 2;</code>
+   */
+  long getDataHoraRegulagem();
+
+  /**
+   * <code>bool regulagemRealizada = 3;</code>
    */
   boolean getRegulagemRealizada();
 }

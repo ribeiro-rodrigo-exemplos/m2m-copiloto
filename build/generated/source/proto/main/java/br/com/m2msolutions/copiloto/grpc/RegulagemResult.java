@@ -16,7 +16,8 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RegulagemResult() {
-    minutosAdiantado_ = 0;
+    tempoRegulado_ = 0D;
+    dataHoraRegulagem_ = 0L;
     regulagemRealizada_ = false;
   }
 
@@ -48,12 +49,17 @@ private static final long serialVersionUID = 0L;
             }
             break;
           }
-          case 8: {
+          case 9: {
 
-            minutosAdiantado_ = input.readInt32();
+            tempoRegulado_ = input.readDouble();
             break;
           }
           case 16: {
+
+            dataHoraRegulagem_ = input.readInt64();
+            break;
+          }
+          case 24: {
 
             regulagemRealizada_ = input.readBool();
             break;
@@ -82,19 +88,28 @@ private static final long serialVersionUID = 0L;
             br.com.m2msolutions.copiloto.grpc.RegulagemResult.class, br.com.m2msolutions.copiloto.grpc.RegulagemResult.Builder.class);
   }
 
-  public static final int MINUTOSADIANTADO_FIELD_NUMBER = 1;
-  private int minutosAdiantado_;
+  public static final int TEMPOREGULADO_FIELD_NUMBER = 1;
+  private double tempoRegulado_;
   /**
-   * <code>int32 minutosAdiantado = 1;</code>
+   * <code>double tempoRegulado = 1;</code>
    */
-  public int getMinutosAdiantado() {
-    return minutosAdiantado_;
+  public double getTempoRegulado() {
+    return tempoRegulado_;
   }
 
-  public static final int REGULAGEMREALIZADA_FIELD_NUMBER = 2;
+  public static final int DATAHORAREGULAGEM_FIELD_NUMBER = 2;
+  private long dataHoraRegulagem_;
+  /**
+   * <code>int64 dataHoraRegulagem = 2;</code>
+   */
+  public long getDataHoraRegulagem() {
+    return dataHoraRegulagem_;
+  }
+
+  public static final int REGULAGEMREALIZADA_FIELD_NUMBER = 3;
   private boolean regulagemRealizada_;
   /**
-   * <code>bool regulagemRealizada = 2;</code>
+   * <code>bool regulagemRealizada = 3;</code>
    */
   public boolean getRegulagemRealizada() {
     return regulagemRealizada_;
@@ -112,11 +127,14 @@ private static final long serialVersionUID = 0L;
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (minutosAdiantado_ != 0) {
-      output.writeInt32(1, minutosAdiantado_);
+    if (tempoRegulado_ != 0D) {
+      output.writeDouble(1, tempoRegulado_);
+    }
+    if (dataHoraRegulagem_ != 0L) {
+      output.writeInt64(2, dataHoraRegulagem_);
     }
     if (regulagemRealizada_ != false) {
-      output.writeBool(2, regulagemRealizada_);
+      output.writeBool(3, regulagemRealizada_);
     }
     unknownFields.writeTo(output);
   }
@@ -126,13 +144,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (minutosAdiantado_ != 0) {
+    if (tempoRegulado_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, minutosAdiantado_);
+        .computeDoubleSize(1, tempoRegulado_);
+    }
+    if (dataHoraRegulagem_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(2, dataHoraRegulagem_);
     }
     if (regulagemRealizada_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(2, regulagemRealizada_);
+        .computeBoolSize(3, regulagemRealizada_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -150,8 +172,12 @@ private static final long serialVersionUID = 0L;
     br.com.m2msolutions.copiloto.grpc.RegulagemResult other = (br.com.m2msolutions.copiloto.grpc.RegulagemResult) obj;
 
     boolean result = true;
-    result = result && (getMinutosAdiantado()
-        == other.getMinutosAdiantado());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getTempoRegulado())
+        == java.lang.Double.doubleToLongBits(
+            other.getTempoRegulado()));
+    result = result && (getDataHoraRegulagem()
+        == other.getDataHoraRegulagem());
     result = result && (getRegulagemRealizada()
         == other.getRegulagemRealizada());
     result = result && unknownFields.equals(other.unknownFields);
@@ -165,8 +191,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + MINUTOSADIANTADO_FIELD_NUMBER;
-    hash = (53 * hash) + getMinutosAdiantado();
+    hash = (37 * hash) + TEMPOREGULADO_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getTempoRegulado()));
+    hash = (37 * hash) + DATAHORAREGULAGEM_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getDataHoraRegulagem());
     hash = (37 * hash) + REGULAGEMREALIZADA_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getRegulagemRealizada());
@@ -299,7 +329,9 @@ private static final long serialVersionUID = 0L;
     }
     public Builder clear() {
       super.clear();
-      minutosAdiantado_ = 0;
+      tempoRegulado_ = 0D;
+
+      dataHoraRegulagem_ = 0L;
 
       regulagemRealizada_ = false;
 
@@ -325,7 +357,8 @@ private static final long serialVersionUID = 0L;
 
     public br.com.m2msolutions.copiloto.grpc.RegulagemResult buildPartial() {
       br.com.m2msolutions.copiloto.grpc.RegulagemResult result = new br.com.m2msolutions.copiloto.grpc.RegulagemResult(this);
-      result.minutosAdiantado_ = minutosAdiantado_;
+      result.tempoRegulado_ = tempoRegulado_;
+      result.dataHoraRegulagem_ = dataHoraRegulagem_;
       result.regulagemRealizada_ = regulagemRealizada_;
       onBuilt();
       return result;
@@ -368,8 +401,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(br.com.m2msolutions.copiloto.grpc.RegulagemResult other) {
       if (other == br.com.m2msolutions.copiloto.grpc.RegulagemResult.getDefaultInstance()) return this;
-      if (other.getMinutosAdiantado() != 0) {
-        setMinutosAdiantado(other.getMinutosAdiantado());
+      if (other.getTempoRegulado() != 0D) {
+        setTempoRegulado(other.getTempoRegulado());
+      }
+      if (other.getDataHoraRegulagem() != 0L) {
+        setDataHoraRegulagem(other.getDataHoraRegulagem());
       }
       if (other.getRegulagemRealizada() != false) {
         setRegulagemRealizada(other.getRegulagemRealizada());
@@ -401,41 +437,67 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int minutosAdiantado_ ;
+    private double tempoRegulado_ ;
     /**
-     * <code>int32 minutosAdiantado = 1;</code>
+     * <code>double tempoRegulado = 1;</code>
      */
-    public int getMinutosAdiantado() {
-      return minutosAdiantado_;
+    public double getTempoRegulado() {
+      return tempoRegulado_;
     }
     /**
-     * <code>int32 minutosAdiantado = 1;</code>
+     * <code>double tempoRegulado = 1;</code>
      */
-    public Builder setMinutosAdiantado(int value) {
+    public Builder setTempoRegulado(double value) {
       
-      minutosAdiantado_ = value;
+      tempoRegulado_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 minutosAdiantado = 1;</code>
+     * <code>double tempoRegulado = 1;</code>
      */
-    public Builder clearMinutosAdiantado() {
+    public Builder clearTempoRegulado() {
       
-      minutosAdiantado_ = 0;
+      tempoRegulado_ = 0D;
+      onChanged();
+      return this;
+    }
+
+    private long dataHoraRegulagem_ ;
+    /**
+     * <code>int64 dataHoraRegulagem = 2;</code>
+     */
+    public long getDataHoraRegulagem() {
+      return dataHoraRegulagem_;
+    }
+    /**
+     * <code>int64 dataHoraRegulagem = 2;</code>
+     */
+    public Builder setDataHoraRegulagem(long value) {
+      
+      dataHoraRegulagem_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 dataHoraRegulagem = 2;</code>
+     */
+    public Builder clearDataHoraRegulagem() {
+      
+      dataHoraRegulagem_ = 0L;
       onChanged();
       return this;
     }
 
     private boolean regulagemRealizada_ ;
     /**
-     * <code>bool regulagemRealizada = 2;</code>
+     * <code>bool regulagemRealizada = 3;</code>
      */
     public boolean getRegulagemRealizada() {
       return regulagemRealizada_;
     }
     /**
-     * <code>bool regulagemRealizada = 2;</code>
+     * <code>bool regulagemRealizada = 3;</code>
      */
     public Builder setRegulagemRealizada(boolean value) {
       
@@ -444,7 +506,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>bool regulagemRealizada = 2;</code>
+     * <code>bool regulagemRealizada = 3;</code>
      */
     public Builder clearRegulagemRealizada() {
       

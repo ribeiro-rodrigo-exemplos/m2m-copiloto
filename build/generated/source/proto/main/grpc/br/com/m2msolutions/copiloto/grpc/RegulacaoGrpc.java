@@ -20,11 +20,11 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.7.0)",
     comments = "Source: proto/copiloto.proto")
-public final class CopilotoGrpc {
+public final class RegulacaoGrpc {
 
-  private CopilotoGrpc() {}
+  private RegulacaoGrpc() {}
 
-  public static final String SERVICE_NAME = "Copiloto";
+  public static final String SERVICE_NAME = "Regulacao";
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
@@ -33,40 +33,40 @@ public final class CopilotoGrpc {
       io.grpc.MethodDescriptor.<br.com.m2msolutions.copiloto.grpc.RegulagemRequest, br.com.m2msolutions.copiloto.grpc.RegulagemResponse>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
-              "Copiloto", "Regular"))
+              "Regulacao", "Regular"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               br.com.m2msolutions.copiloto.grpc.RegulagemRequest.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               br.com.m2msolutions.copiloto.grpc.RegulagemResponse.getDefaultInstance()))
-          .setSchemaDescriptor(new CopilotoMethodDescriptorSupplier("Regular"))
+          .setSchemaDescriptor(new RegulacaoMethodDescriptorSupplier("Regular"))
           .build();
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static CopilotoStub newStub(io.grpc.Channel channel) {
-    return new CopilotoStub(channel);
+  public static RegulacaoStub newStub(io.grpc.Channel channel) {
+    return new RegulacaoStub(channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static CopilotoBlockingStub newBlockingStub(
+  public static RegulacaoBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new CopilotoBlockingStub(channel);
+    return new RegulacaoBlockingStub(channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static CopilotoFutureStub newFutureStub(
+  public static RegulacaoFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new CopilotoFutureStub(channel);
+    return new RegulacaoFutureStub(channel);
   }
 
   /**
    */
-  public static abstract class CopilotoImplBase implements io.grpc.BindableService {
+  public static abstract class RegulacaoImplBase implements io.grpc.BindableService {
 
     /**
      */
@@ -90,20 +90,20 @@ public final class CopilotoGrpc {
 
   /**
    */
-  public static final class CopilotoStub extends io.grpc.stub.AbstractStub<CopilotoStub> {
-    private CopilotoStub(io.grpc.Channel channel) {
+  public static final class RegulacaoStub extends io.grpc.stub.AbstractStub<RegulacaoStub> {
+    private RegulacaoStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private CopilotoStub(io.grpc.Channel channel,
+    private RegulacaoStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected CopilotoStub build(io.grpc.Channel channel,
+    protected RegulacaoStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new CopilotoStub(channel, callOptions);
+      return new RegulacaoStub(channel, callOptions);
     }
 
     /**
@@ -117,20 +117,20 @@ public final class CopilotoGrpc {
 
   /**
    */
-  public static final class CopilotoBlockingStub extends io.grpc.stub.AbstractStub<CopilotoBlockingStub> {
-    private CopilotoBlockingStub(io.grpc.Channel channel) {
+  public static final class RegulacaoBlockingStub extends io.grpc.stub.AbstractStub<RegulacaoBlockingStub> {
+    private RegulacaoBlockingStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private CopilotoBlockingStub(io.grpc.Channel channel,
+    private RegulacaoBlockingStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected CopilotoBlockingStub build(io.grpc.Channel channel,
+    protected RegulacaoBlockingStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new CopilotoBlockingStub(channel, callOptions);
+      return new RegulacaoBlockingStub(channel, callOptions);
     }
 
     /**
@@ -143,20 +143,20 @@ public final class CopilotoGrpc {
 
   /**
    */
-  public static final class CopilotoFutureStub extends io.grpc.stub.AbstractStub<CopilotoFutureStub> {
-    private CopilotoFutureStub(io.grpc.Channel channel) {
+  public static final class RegulacaoFutureStub extends io.grpc.stub.AbstractStub<RegulacaoFutureStub> {
+    private RegulacaoFutureStub(io.grpc.Channel channel) {
       super(channel);
     }
 
-    private CopilotoFutureStub(io.grpc.Channel channel,
+    private RegulacaoFutureStub(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected CopilotoFutureStub build(io.grpc.Channel channel,
+    protected RegulacaoFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
-      return new CopilotoFutureStub(channel, callOptions);
+      return new RegulacaoFutureStub(channel, callOptions);
     }
 
     /**
@@ -175,10 +175,10 @@ public final class CopilotoGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final CopilotoImplBase serviceImpl;
+    private final RegulacaoImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(CopilotoImplBase serviceImpl, int methodId) {
+    MethodHandlers(RegulacaoImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -207,9 +207,9 @@ public final class CopilotoGrpc {
     }
   }
 
-  private static abstract class CopilotoBaseDescriptorSupplier
+  private static abstract class RegulacaoBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    CopilotoBaseDescriptorSupplier() {}
+    RegulacaoBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
@@ -218,21 +218,21 @@ public final class CopilotoGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("Copiloto");
+      return getFileDescriptor().findServiceByName("Regulacao");
     }
   }
 
-  private static final class CopilotoFileDescriptorSupplier
-      extends CopilotoBaseDescriptorSupplier {
-    CopilotoFileDescriptorSupplier() {}
+  private static final class RegulacaoFileDescriptorSupplier
+      extends RegulacaoBaseDescriptorSupplier {
+    RegulacaoFileDescriptorSupplier() {}
   }
 
-  private static final class CopilotoMethodDescriptorSupplier
-      extends CopilotoBaseDescriptorSupplier
+  private static final class RegulacaoMethodDescriptorSupplier
+      extends RegulacaoBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final String methodName;
 
-    CopilotoMethodDescriptorSupplier(String methodName) {
+    RegulacaoMethodDescriptorSupplier(String methodName) {
       this.methodName = methodName;
     }
 
@@ -247,11 +247,11 @@ public final class CopilotoGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (CopilotoGrpc.class) {
+      synchronized (RegulacaoGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new CopilotoFileDescriptorSupplier())
+              .setSchemaDescriptor(new RegulacaoFileDescriptorSupplier())
               .addMethod(METHOD_REGULAR)
               .build();
         }

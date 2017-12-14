@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.grpc.CopilotoGrpc
+import br.com.m2msolutions.copiloto.grpc.RegulacaoGrpc
 import br.com.m2msolutions.copiloto.grpc.RegulagemRequest
 import br.com.m2msolutions.copiloto.grpc.RegulagemResponse
 import br.com.m2msolutions.copiloto.grpc.RegulagemResult
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
+class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
 
     @Autowired
     MomentoViagemBuilder momentoViagemBuilder
@@ -68,7 +68,7 @@ class CopilotoService extends CopilotoGrpc.CopilotoImplBase {
     private RegulagemResponse criarResposta(Regulagem regulagem){
 
         RegulagemResult result = RegulagemResult.newBuilder()
-                                                .setMinutosAdiantado(regulagem ? regulagem.tempoReguladoEmMinutos() : 0)
+                                                .setTempoRegulado(regulagem ? regulagem.tempoReguladoEmMinutos() : 0)
                                                 .setRegulagemRealizada(regulagem != null)
                                                 .build()
         RegulagemResponse

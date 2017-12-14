@@ -4,7 +4,7 @@ option java_package = "br.com.m2msolutions.copiloto.grpc";
 option java_multiple_files = true;
 option java_outer_classname = "CopilotoProto";
 
-service Copiloto{
+service Regulacao{
     rpc Regular(RegulagemRequest) returns (RegulagemResponse){}
 }
 
@@ -25,6 +25,7 @@ message RegulagemResponse{
 }
 
 message RegulagemResult{
-    int32 minutosAdiantado = 1;
-    bool regulagemRealizada = 2;
+    double tempoRegulado = 1;
+    int64 dataHoraRegulagem = 2;
+    bool regulagemRealizada = 3;
 }
