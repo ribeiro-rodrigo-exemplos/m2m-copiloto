@@ -6,15 +6,13 @@ import groovy.time.TimeDuration
 class Regulagem {
 
     TimeDuration tempoRegulado
-
-    private Boolean prumo
     private DateHelper dateUtil
 
     Integer tempoReguladoEmMinutos(){
         dateUtil.obterDuracaosEmMinutos tempoRegulado
     }
 
-    Boolean getPrumo(){
-        (-1..1).contains(tempoReguladoEmMinutos())
+    Double tempoReguladoEmMinutosESegundos(){
+        dateUtil.obterMinutosESegundosEmNumeroReal tempoRegulado
     }
 }

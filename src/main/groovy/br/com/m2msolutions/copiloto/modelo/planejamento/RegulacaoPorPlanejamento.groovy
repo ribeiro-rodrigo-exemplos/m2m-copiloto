@@ -39,16 +39,12 @@ class RegulacaoPorPlanejamento implements Regulacao {
         dateUtil.calcularDiferenca dataHoraPartida,dataHoraChegadaPlanejada
     }
 
-    private TimeDuration calcularTempoGastoIdeal(Float percentualConclusao, TimeDuration duracaoEstimadaDoTrajeto){
+    private TimeDuration calcularTempoGastoIdeal(BigDecimal percentualConclusao, TimeDuration duracaoEstimadaDoTrajeto){
 
         def tempoTotalEmMinutos = dateUtil.obterDuracaosEmMinutos duracaoEstimadaDoTrajeto
         def tempoIdealParaPosicao = (percentualConclusao / 100 ) * tempoTotalEmMinutos
 
-        def round = Math.round(tempoIdealParaPosicao) as Integer
-
-        use(TimeCategory){
-            round.minutes
-        }
+        dateUtil.obterDuracao tempoIdealParaPosicao
     }
 
     private TimeDuration calcularTempoGastoNoTrajeto(Date dataHoraPartida,Date dataHoraTransmissao){

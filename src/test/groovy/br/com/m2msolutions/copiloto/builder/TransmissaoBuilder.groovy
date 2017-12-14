@@ -12,9 +12,9 @@ class TransmissaoBuilder {
         this
     }
 
-    Date transmitiuAposMinutosDeViagem(Integer minutosTramissao){
+    Date transmitiuAposTempoDeViagem(Integer minutosTramissao,Integer segundosTransmissao = 0){
         use(TimeCategory){
-            alocacao.momentoDaPartida + minutosTramissao.minutes
+            alocacao.momentoDaPartida + minutosTramissao.minutes + segundosTransmissao.seconds
         }
     }
 }

@@ -10,7 +10,7 @@ import groovy.transform.PackageScope
 class MomentoViagem {
 
     Date momentoDaTransmissao
-    Float percentualDeConclusao
+    BigDecimal percentualDeConclusao
     Veiculo veiculo
 
     private String linhaId
