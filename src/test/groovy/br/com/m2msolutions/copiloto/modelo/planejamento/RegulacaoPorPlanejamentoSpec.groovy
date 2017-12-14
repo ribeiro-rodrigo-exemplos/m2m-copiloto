@@ -152,7 +152,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
             0.0 == emMinutosESegundos(tempoRegulado)
     }
 
-    /*def 'Deve calcular prumo com adiantamento de 1 minuto' () {
+    def 'Deve calcular prumo com adiantamento de 1 minuto' () {
 
         given: 'Criando alocação da viagem'
 
@@ -175,7 +175,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                             .naLinha('Linha12')
                                             .doCliente(209)
                                             .noTrajeto('TRAJETO12')
-                                            .comPercentualDeConclusao(51)
+                                            .comPercentualDeConclusao(52)
                                             .comVeiculo(1212)
                                             .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
                                             .transmitiuEm(momentoDaTransmissao)
@@ -192,6 +192,42 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
     }
 
     def 'Deve calcular prumo com atraso de 1 minuto' (){
+
+        given: 'Criando alocação da viagem'
+
+            def alocacao = alocacaoBuilder
+                                .planejadaPara(new Date())
+                                .comMinutosDeDuracao(60)
+                                .iniciouComMinutosDeAtraso(10)
+                                .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                                            .emViagemComAlocacao(alocacao)
+                                            .transmitiuAposTempoDeViagem(26)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                        .criarMomento()
+                                        .naLinha('Linha12')
+                                        .doCliente(209)
+                                        .noTrajeto('TRAJETO12')
+                                        .comPercentualDeConclusao(50)
+                                        .comVeiculo(1212)
+                                        .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                        .transmitiuEm(momentoDaTransmissao)
+                                        .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            def tempoRegulado = regulacao.regular momento
+
+        then:
+
+            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            -1.0 == emMinutosESegundos(tempoRegulado)
 
     }
 
@@ -232,7 +268,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
             (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> null
             thrown(RegulagemException)
-    }*/
+    }
 
     private Double emMinutosESegundos(TimeDuration duration){
         dateUtil.obterMinutosESegundosEmNumeroReal duration
