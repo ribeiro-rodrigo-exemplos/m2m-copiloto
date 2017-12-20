@@ -68,9 +68,10 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
     private RegulagemResponse criarResposta(Regulagem regulagem){
 
         RegulagemResult result = RegulagemResult.newBuilder()
-                                                .setTempoRegulado(regulagem ? regulagem.tempoReguladoEmMinutos() : 0)
-                                                .setRegulagemRealizada(regulagem != null)
-                                                .build()
+                                            .setTempoRegulado(regulagem ? regulagem.tempoReguladoEmMinutosESegundos() : new Double(0.0))
+                                            .setDataHoraRegulagem(0l)
+                                            .setRegulagemRealizada(regulagem != null)
+                                            .build()
         RegulagemResponse
                 .newBuilder()
                 .setResult(result)

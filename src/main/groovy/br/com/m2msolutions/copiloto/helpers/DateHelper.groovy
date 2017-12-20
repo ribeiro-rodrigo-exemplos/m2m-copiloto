@@ -4,10 +4,24 @@ import groovy.time.TimeCategory
 import groovy.time.TimeDuration
 import org.springframework.stereotype.Component
 
+import java.sql.Time
 import java.util.concurrent.TimeUnit
+
+import static java.util.Calendar.*
 
 @Component
 class DateHelper {
+
+    Date criarInstanteDoDia(Date dia, Time tempo){
+
+        def data = dia.clone() as Date
+
+        data[HOUR_OF_DAY] = tempo[HOUR_OF_DAY]
+        data[MINUTE] = tempo[MINUTE]
+        data[SECOND] = tempo[SECOND]
+
+        data
+    }
 
     Date converter(Long timeMillis){
         new Date(timeMillis)

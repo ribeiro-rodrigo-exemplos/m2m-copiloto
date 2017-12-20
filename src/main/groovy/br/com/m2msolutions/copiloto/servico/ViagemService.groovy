@@ -1,43 +1,42 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.helpers.hazelcast.mapping.AlocacaoMapping
-import br.com.m2msolutions.copiloto.helpers.hazelcast.portable.AlocacaoPortable
+import br.com.m2msolutions.copiloto.helpers.DateHelper
 import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
-import com.hazelcast.core.HazelcastInstance
-import com.hazelcast.core.IMap
-import com.hazelcast.query.Predicate
-import com.hazelcast.query.PredicateBuilder
+import br.com.m2msolutions.copiloto.repositorio.AlocacaoRepository
+import br.com.m2msolutions.copiloto.repositorio.HorarioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-import javax.annotation.PostConstruct
+import java.sql.Time
 
 @Service
 class ViagemService {
 
     @Autowired
-    HazelcastInstance hazelcastInstance
+    HorarioRepository horarioRepository
     @Autowired
-    AlocacaoMapping alocacaoMapping
-
-    private IMap<String,AlocacaoPortable> mapa
-
-    private static String ALOCACAO_CACHE = "alocacao"
+    AlocacaoRepository alocacaoRepository
+    @Autowired
+    DateHelper dateHelper
 
     Alocacao obterAlocacaoDoVeiculo(Integer veiculoId){
 
-        Predicate predicate = new PredicateBuilder()
-                                        .getEntryObject()
-                                            .get('idVeiculo')
-                                        .equal(veiculoId)
+        def alocacao = alocacaoRepository.obterAlocacaoDoVeiculo veiculoId
 
-        def portables = mapa.values predicate
+        if(!alocacao)
+            return null
 
-        portables ? alocacaoMapping.map(portables[0]) : null
-    }
+        def horarioDaAlocacao = horarioRepository.findOne alocacao.horarioId
 
-    @PostConstruct
-    private void obterMapa(){
-        mapa = hazelcastInstance.getMap ALOCACAO_CACHE
+        if(!horarioDaAlocacao)
+            return null
+
+        alocacao.partidaPlanejada = dateHelper.criarInstanteDoDia alocacao.momentoDaPartida, horarioDaAlocacao.partida as Time
+        alocacao.chegadaPlanejada = dateHelper.criarInstanteDoDia alocacao.momentoDaPartida, horarioDaAlocacao.chegada as Time
+
+        if(horarioDaAlocacao.partida.after(horarioDaAlocacao.chegada))
+            alocacao.chegadaPlanejada = alocacao.chegadaPlanejada + 1
+
+        alocacao
     }
 }

@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import javax.annotation.PreDestroy
-/**
- * Created by rodrigo on 23/11/17.
- */
+
 @Component
 class Bootstrap implements CommandLineRunner{
 

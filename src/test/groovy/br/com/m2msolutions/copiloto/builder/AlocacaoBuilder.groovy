@@ -20,6 +20,16 @@ class AlocacaoBuilder {
         }
     }
 
+    AlocacaoBuilder iniciouEm(Date data){
+        alocacao.momentoDaPartida = data
+        this
+    }
+
+    AlocacaoBuilder comHorarioId(Integer horarioId){
+        alocacao.horarioId = horarioId
+        this
+    }
+
     AlocacaoBuilder comMinutosDeDuracao(Integer duracao){
         use(TimeCategory){
             alocacao.chegadaPlanejada = alocacao.partidaPlanejada.clone() as Date
