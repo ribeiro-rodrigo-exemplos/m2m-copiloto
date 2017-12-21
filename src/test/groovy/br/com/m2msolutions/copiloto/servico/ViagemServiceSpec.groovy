@@ -75,7 +75,7 @@ class ViagemServiceSpec extends Specification {
             alocacao == null
     }
 
-    def 'Deve retornar alocacao com horarios do dia da abertura de viagem' () {
+    def 'Deve retornar alocacao com horarios de partida e chegada no mesmo dia da abertura de viagem' () {
 
         given: 'Criando alocação que será retornada pelo AlocacaoRepository'
 
@@ -88,7 +88,7 @@ class ViagemServiceSpec extends Specification {
 
             def alocacao = viagemService.obterAlocacaoDoVeiculo 14
 
-        then:
+        then: 'Os horários de partida e chegada da alocação devem ser do mesmo dia da abertura de viagem'
 
             alocacaoRepository.obterAlocacaoDoVeiculo(14) >> alocacaoRetornada
             horarioRepository.findOne(12) >> new Horario(
@@ -105,7 +105,7 @@ class ViagemServiceSpec extends Specification {
             alocacao?.chegadaPlanejada[YEAR] == alocacaoRetornada.momentoDaPartida[YEAR]
     }
 
-    def 'Deve retornar alocacao com horario de chegada do dia seguinte' () {
+    def 'Deve retornar alocacao com horario de chegada do no dia seguinte' () {
 
         given: 'Criando alocação que será retornada pelo AlocacaoRepository'
 
@@ -118,7 +118,7 @@ class ViagemServiceSpec extends Specification {
 
             def alocacao = viagemService.obterAlocacaoDoVeiculo 14
 
-        then:
+        then: 'HorarioRepository retorna um horário com chegada inferior ao da partida'
 
             alocacaoRepository.obterAlocacaoDoVeiculo(14) >> alocacaoRetornada
             horarioRepository.findOne(12) >> new Horario(
