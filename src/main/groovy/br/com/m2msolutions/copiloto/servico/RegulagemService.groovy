@@ -11,7 +11,11 @@ import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.helpers.DateHelper
+import io.grpc.Status
+import io.grpc.StatusException
 import io.grpc.stub.StreamObserver
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -27,8 +31,13 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
     @Autowired
     DateHelper dateUtil
 
+    private final Logger logger = LoggerFactory.getLogger(getClass())
+
     @Override
     void regular(RegulagemRequest request, StreamObserver<RegulagemResponse> responseObserver) {
+
+        logger.info "Requisicao recebida: Trajeto: ${request?.idTrajeto}, Veiculo: ${request?.idVeiculo}, " +
+                "Cliente: ${request?.idCliente}."
 
         MomentoViagem momentoViagem = criarMomentoDaViagem request
 
@@ -39,17 +48,28 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
 
             try{
 
+                logger.info "Tipo de regulagem configurada para o trajeto ${trajeto.trajetoId}: ${trajeto.tipoRegulacao}"
+
                 def regulagem = reguladorDeViagem.regular momentoViagem, algoritmoDeRegulacao
                 responseObserver.onNext(criarResposta(regulagem))
-
-            }catch (RegulagemException e){
+            }
+            catch (RegulagemException e){
+                logger.warn "Não foi possivel regular a viagem ${e.message}"
                 responseObserver.onNext(criarResposta(null))
             }
+            catch (Exception e){
+                logger.error "Erro ao regular a viagem: ${e.message}"
+                responseObserver.onError(new StatusException(Status.INTERNAL))
+            }
         }
-        else
+        else{
+            logger.warn "Trajeto ${request.idTrajeto} não encontrado ou nao possui algoritmo configurado."
             responseObserver.onNext(criarRespostaEmBranco())
+        }
 
         responseObserver.onCompleted()
+
+        logger.info 'Resposta enviada ao cliente.'
     }
 
     private MomentoViagem criarMomentoDaViagem(RegulagemRequest request){
