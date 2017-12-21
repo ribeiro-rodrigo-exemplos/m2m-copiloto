@@ -15,8 +15,6 @@ class AlocacaoMapping {
     Alocacao map(AlocacaoPortable portable){
         new Alocacao(
                 momentoDaPartida: dateUtil.converter(portable.dataTransmissao),
-                chegadaPlanejada: dateUtil.converter(portable.chegada),
-                partidaPlanejada: dateUtil.converter(portable.partida),
                 horarioId: portable.horarioId as Integer
         )
     }
