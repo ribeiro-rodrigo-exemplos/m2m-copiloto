@@ -13,6 +13,7 @@ class MomentoViagem {
     BigDecimal percentualDeConclusao
     Veiculo veiculo
 
+    private Alocacao alocacao
     private String linhaId
     private String trajetoId
     private ViagemService viagemService
@@ -39,7 +40,10 @@ class MomentoViagem {
     }
 
     Alocacao getAlocacao(){
-        viagemService.obterAlocacaoDoVeiculo veiculo?.veiculoId
+        if(!alocacao)
+            alocacao = viagemService.obterAlocacaoDoVeiculo veiculo?.veiculoId
+
+        alocacao
     }
 
     Trajeto getTrajeto(){
