@@ -2,6 +2,7 @@ package br.com.m2msolutions.copiloto.helpers
 
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 import java.sql.Time
@@ -11,6 +12,9 @@ import static java.util.Calendar.*
 
 @Component
 class DateHelper {
+
+    @Autowired
+    NumberHelper numberHelper
 
     Date criarInstanteDoDia(Date dia, Time tempo){
 
@@ -70,14 +74,11 @@ class DateHelper {
 
             segundos = duracao.seconds.div 100
 
-            if(ehNegativo(minutos))
+            if(numberHelper.ehNegativo(minutos))
                 segundos = -segundos
         }
 
         duracao.minutes + segundos
     }
 
-    private Boolean ehNegativo(Integer numero){
-        numero != Math.sqrt(numero.power(2) as Integer)
-    }
 }
