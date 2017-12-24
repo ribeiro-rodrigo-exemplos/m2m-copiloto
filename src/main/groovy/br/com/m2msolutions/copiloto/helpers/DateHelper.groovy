@@ -74,7 +74,15 @@ class DateHelper {
     }
 
     Double obterMinutosESegundosEmNumeroReal(TimeDuration duracao){
-        "${duracao.minutes}.${duracao.seconds}" as Double
+
+        def segundos = 0
+
+        if(duracao.seconds){
+            segundos = duracao.seconds.div 100
+            if(numberHelper.ehNegativo(duracao.minutes))
+                segundos = -segundos
+        }
+            duracao.minutes + segundos
     }
 
 }
