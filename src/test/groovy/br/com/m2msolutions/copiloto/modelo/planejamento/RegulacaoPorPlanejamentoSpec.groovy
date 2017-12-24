@@ -2,6 +2,7 @@ package br.com.m2msolutions.copiloto.modelo.planejamento
 
 import br.com.m2msolutions.copiloto.builder.AlocacaoBuilder
 import br.com.m2msolutions.copiloto.builder.TransmissaoBuilder
+import br.com.m2msolutions.copiloto.helpers.NumberHelper
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
@@ -29,7 +30,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         momentoBuilder = new MomentoViagemBuilder(viagemService: viagemService)
         transmissaoBuilder = new TransmissaoBuilder()
 
-        dateUtil = new DateHelper()
+        dateUtil = new DateHelper(numberHelper: new NumberHelper())
 
         regulacao = new RegulacaoPorPlanejamento(dateUtil: dateUtil)
 
