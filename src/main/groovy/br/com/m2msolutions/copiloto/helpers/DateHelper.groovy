@@ -43,7 +43,15 @@ class DateHelper {
 
     TimeDuration calcularDiferenca(TimeDuration periodoInicial,TimeDuration periodoFinal){
         use(TimeCategory){
-            periodoFinal - periodoInicial
+            def diferenca = periodoFinal - periodoInicial
+            if(numberHelper.ehNegativo(diferenca.seconds) && numberHelper.ehPositivo(diferenca.minutes)){
+                if(diferenca.minutes > 0){
+                    diferenca = diferenca - 1.minutes
+                    diferenca = diferenca + 60.seconds
+                }
+            }
+
+            diferenca as TimeDuration
         }
     }
 
@@ -66,19 +74,7 @@ class DateHelper {
     }
 
     Double obterMinutosESegundosEmNumeroReal(TimeDuration duracao){
-
-        def segundos = 0
-        Integer minutos = duracao.minutes
-
-        if(duracao.seconds){
-
-            segundos = duracao.seconds.div 100
-
-            if(numberHelper.ehNegativo(minutos))
-                segundos = -segundos
-        }
-
-        duracao.minutes + segundos
+        "${duracao.minutes}.${duracao.seconds}" as Double
     }
 
 }

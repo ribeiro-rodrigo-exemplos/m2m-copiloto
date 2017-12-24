@@ -9,21 +9,14 @@ class Regulagem {
     TimeDuration tempoRegulado
     Date momentoDaRegulagem = new Date()
 
-    private DateHelper dateUtil
+    private DateHelper dateHelper
     private NumberHelper numberHelper
 
     Integer tempoReguladoEmMinutos(){
-        dateUtil.obterDuracaosEmMinutos tempoRegulado
+        dateHelper.obterDuracaosEmMinutos tempoRegulado
     }
 
     Double tempoReguladoEmMinutosESegundos(){
-
-        if(numberHelper.ehNegativo(tempoRegulado.seconds)){
-            def tempo = dateUtil.obterMinutosESegundosEmNumeroReal tempoRegulado
-            def timeDuration = dateUtil.obterDuracao(tempo as BigDecimal)
-            return dateUtil.obterMinutosESegundosEmNumeroReal(timeDuration)
-        }
-
-        dateUtil.obterMinutosESegundosEmNumeroReal tempoRegulado
+        dateHelper.obterMinutosESegundosEmNumeroReal tempoRegulado
     }
 }

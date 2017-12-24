@@ -23,7 +23,7 @@ class ReguladorDeViagem {
 
        TimeDuration tempoDeRegulagem = algoritmo.regular momentoViagem
 
-        def regulagem = new Regulagem(tempoRegulado: tempoDeRegulagem,dateUtil: dateUtil,numberHelper:numberHelper)
+        def regulagem = new Regulagem(tempoRegulado: tempoDeRegulagem, dateHelper: dateUtil,numberHelper:numberHelper)
 
         copilotoLed.enviarComando(
             momentoViagem?.veiculo?.clienteId,

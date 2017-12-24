@@ -8,4 +8,8 @@ class NumberHelper {
     Boolean ehNegativo(Integer numero){
         numero != Math.sqrt(numero.power(2) as Integer)
     }
+
+    Boolean ehPositivo(Integer numero){
+        !ehNegativo(numero)
+    }
 }
