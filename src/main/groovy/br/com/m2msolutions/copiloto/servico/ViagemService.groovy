@@ -23,12 +23,12 @@ class ViagemService {
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
-    Alocacao obterAlocacaoDoVeiculo(Integer veiculoId){
+    Alocacao obterAlocacaoDaViagem(String viagemId){
 
-        def alocacao = alocacaoRepository.obterAlocacaoDoVeiculo veiculoId
+        def alocacao = alocacaoRepository.obterAlocacaoDaViagem viagemId
 
         if(!alocacao){
-            logger.warn "Alocacao do veiculo ${veiculoId} nao encontrada."
+            logger.warn "Alocacao da viagem ${viagemId} nao encontrada."
             return null
         }
 

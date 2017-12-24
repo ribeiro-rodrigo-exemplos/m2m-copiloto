@@ -24,12 +24,12 @@ class AlocacaoRepository {
 
     private static String ALOCACAO_CACHE = 'alocacao'
 
-    Alocacao obterAlocacaoDoVeiculo(Integer veiculoId){
+    Alocacao obterAlocacaoDaViagem(String viagemId){
 
         Predicate predicate = new PredicateBuilder()
                                         .getEntryObject()
-                                        .get('idVeiculo')
-                                        .equal(veiculoId)
+                                        .get('viagemId')
+                                        .equal(viagemId)
 
         def portables = mapa.values predicate
 

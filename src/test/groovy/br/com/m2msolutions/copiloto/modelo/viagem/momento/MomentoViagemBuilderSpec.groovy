@@ -16,7 +16,7 @@ class MomentoViagemBuilderSpec extends Specification {
     void setup(){
 
         viagemService = Mock(ViagemService){
-            obterAlocacaoDoVeiculo(_) >> new Alocacao()
+            obterAlocacaoDaViagem(_) >> new Alocacao()
         }
 
         trajetoService = Mock(TrajetoService){

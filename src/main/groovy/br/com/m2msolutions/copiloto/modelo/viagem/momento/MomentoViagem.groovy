@@ -15,6 +15,7 @@ class MomentoViagem {
 
     private Alocacao alocacao
     private String linhaId
+    private String viagemId
     private String trajetoId
     private ViagemService viagemService
     private TrajetoService trajetoService
@@ -30,6 +31,11 @@ class MomentoViagem {
     }
 
     @PackageScope
+    void setViagemId(String viagemId){
+        this.viagemId = viagemId
+    }
+
+    @PackageScope
     void setViagemService(ViagemService viagemService){
         this.viagemService = viagemService
     }
@@ -41,7 +47,7 @@ class MomentoViagem {
 
     Alocacao getAlocacao(){
         if(!alocacao)
-            alocacao = viagemService.obterAlocacaoDoVeiculo veiculo?.veiculoId
+            alocacao = viagemService.obterAlocacaoDaViagem viagemId
 
         alocacao
     }

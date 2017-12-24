@@ -36,6 +36,11 @@ class MomentoViagemBuilder {
             this
         }
 
+        Builder emViagem(String viagemId){
+            situacaoViagem.viagemId = viagemId
+            this
+        }
+
         Builder noTrajeto(String trajetoId){
             situacaoViagem.trajetoId = trajetoId
             this

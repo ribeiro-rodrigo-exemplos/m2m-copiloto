@@ -58,6 +58,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                             .naLinha('Linha12')
                                             .doCliente(209)
+                                            .emViagem('5a3f8f13e4b0332c0ae45e81')
                                             .noTrajeto('14')
                                             .comPercentualDeConclusao(25)
                                             .comVeiculo(1212)
@@ -71,7 +72,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
             6.45 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -97,6 +98,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                             .naLinha('Linha12')
                                             .doCliente(209)
+                                            .emViagem('5a3f8f13e4b0332c0ae45e81')
                                             .noTrajeto('TRAJETO12')
                                             .comPercentualDeConclusao(16)
                                             .comVeiculo(1212)
@@ -110,7 +112,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
             -8.14 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -136,6 +138,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                         .naLinha('Linha12')
                                         .doCliente(209)
+                                        .emViagem('5a3f8f13e4b0332c0ae45e81')
                                         .noTrajeto('TRAJETO12')
                                         .comPercentualDeConclusao(50)
                                         .comVeiculo(1212)
@@ -149,7 +152,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
             0.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -175,6 +178,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                             .naLinha('Linha12')
                                             .doCliente(209)
+                                            .emViagem('5a3f8f13e4b0332c0ae45e81')
                                             .noTrajeto('TRAJETO12')
                                             .comPercentualDeConclusao(52)
                                             .comVeiculo(1212)
@@ -188,7 +192,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
             1.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -214,6 +218,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                         .naLinha('Linha12')
                                         .doCliente(209)
+                                        .emViagem('5a3f8f13e4b0332c0ae45e81')
                                         .noTrajeto('TRAJETO12')
                                         .comPercentualDeConclusao(50)
                                         .comVeiculo(1212)
@@ -227,7 +232,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> alocacao
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
             -1.0 == emMinutosESegundos(tempoRegulado)
 
     }
@@ -254,6 +259,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
                                         .criarMomento()
                                         .naLinha('Linha12')
                                         .doCliente(209)
+                                        .emViagem('5a3f8f13e4b0332c0ae45e81')
                                         .noTrajeto('TRAJETO12')
                                         .comPercentualDeConclusao(50)
                                         .comVeiculo(1212)
@@ -267,7 +273,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDoVeiculo(1212) >> null
+            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> null
             thrown(RegulagemException)
     }
 

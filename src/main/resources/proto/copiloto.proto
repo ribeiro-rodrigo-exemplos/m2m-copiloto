@@ -11,8 +11,9 @@ service Regulacao{
 message RegulagemRequest{
     int32 idCliente = 1;
     int32 idVeiculo = 2;
-    string idLinha = 3;
-    string idTrajeto = 4;
+    string idViagem = 3;
+    string idLinha = 4;
+    string idTrajeto = 5;
     string modeloModulo = 6;
     string identificadorModulo = 7;
     int64 dataHoraTransmissao = 8;

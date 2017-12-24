@@ -42,12 +42,12 @@ class ViagemServiceSpec extends Specification {
                                             .comHorarioId(12)
                                             .criar()
 
-        when: 'Obtendo alocação do veículo'
+        when: 'Obtendo alocação da viagem'
 
-            def alocacao = viagemService.obterAlocacaoDoVeiculo 14
+            def alocacao = viagemService.obterAlocacaoDaViagem '5a3f8f13e4b0332c0ae45e81'
 
         then:
-            alocacaoRepository.obterAlocacaoDoVeiculo(14) >> alocacaoRetornada
+            alocacaoRepository.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacaoRetornada
             horarioRepository.findOne(12) >> new Horario(
                     partida: new Time(criarData (1, 1, 1970, 14).time),
                     chegada: new Time(criarData (1, 1, 1970, 16).time)
@@ -57,20 +57,20 @@ class ViagemServiceSpec extends Specification {
 
     def 'Deve retornar nulo caso alocacao não exista' () {
 
-        when: 'Obtendo alocação do veículo'
-            def alocacao = viagemService.obterAlocacaoDoVeiculo 14
+        when: 'Obtendo alocação da viagem'
+            def alocacao = viagemService.obterAlocacaoDaViagem '5a3f8f13e4b0332c0ae45e81'
         then:
-            alocacaoRepository.obterAlocacaoDoVeiculo(_) >> null
+            alocacaoRepository.obterAlocacaoDaViagem(_) >> null
             horarioRepository.findOne(_) >> new Horario()
             alocacao == null
     }
 
     def 'Nao deve retornar alocacao sem horario' () {
 
-        when: 'Obtendo alocação do veículo'
-            def alocacao = viagemService.obterAlocacaoDoVeiculo 14
+        when: 'Obtendo alocação da viagem'
+            def alocacao = viagemService.obterAlocacaoDaViagem '5a3f8f13e4b0332c0ae45e81'
         then:
-            alocacaoRepository.obterAlocacaoDoVeiculo(14) >> new Alocacao(horarioId: 12)
+            alocacaoRepository.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> new Alocacao(horarioId: 12)
             horarioRepository.findOne(12) >> null
             alocacao == null
     }
@@ -86,11 +86,11 @@ class ViagemServiceSpec extends Specification {
 
         when: 'Obtendo alocação do veículo'
 
-            def alocacao = viagemService.obterAlocacaoDoVeiculo 14
+            def alocacao = viagemService.obterAlocacaoDaViagem '5a3f8f13e4b0332c0ae45e81'
 
         then: 'Os horários de partida e chegada da alocação devem ser do mesmo dia da abertura de viagem'
 
-            alocacaoRepository.obterAlocacaoDoVeiculo(14) >> alocacaoRetornada
+            alocacaoRepository.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacaoRetornada
             horarioRepository.findOne(12) >> new Horario(
                     partida: new Time(criarData (1, 1, 1970, 14).time),
                     chegada: new Time(criarData (1, 1, 1970, 15).time)
@@ -105,7 +105,7 @@ class ViagemServiceSpec extends Specification {
             alocacao?.chegadaPlanejada[YEAR] == alocacaoRetornada.momentoDaPartida[YEAR]
     }
 
-    def 'Deve retornar alocacao com horario de chegada do no dia seguinte' () {
+    def 'Deve retornar alocacao com horario de chegada no dia seguinte' () {
 
         given: 'Criando alocação que será retornada pelo AlocacaoRepository'
 
@@ -114,13 +114,13 @@ class ViagemServiceSpec extends Specification {
                                             .comHorarioId(12)
                                             .criar()
 
-        when: 'Obtendo alocação do veículo'
+        when: 'Obtendo alocação da viagem'
 
-            def alocacao = viagemService.obterAlocacaoDoVeiculo 14
+            def alocacao = viagemService.obterAlocacaoDaViagem '5a3f8f13e4b0332c0ae45e81'
 
         then: 'HorarioRepository retorna um horário com chegada inferior ao da partida'
 
-            alocacaoRepository.obterAlocacaoDoVeiculo(14) >> alocacaoRetornada
+            alocacaoRepository.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacaoRetornada
             horarioRepository.findOne(12) >> new Horario(
                     partida: new Time(criarData (1, 1, 1970, 14).time),
                     chegada: new Time(criarData (1, 1, 1970, 12).time)
