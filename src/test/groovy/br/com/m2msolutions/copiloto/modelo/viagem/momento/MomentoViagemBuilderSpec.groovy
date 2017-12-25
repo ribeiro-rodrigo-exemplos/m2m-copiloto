@@ -3,6 +3,7 @@ package br.com.m2msolutions.copiloto.modelo.viagem.momento
 import br.com.m2msolutions.copiloto.modelo.Trajeto
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
+import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
 import br.com.m2msolutions.copiloto.servico.TrajetoService
 import br.com.m2msolutions.copiloto.servico.ViagemService
 import spock.lang.Specification
@@ -16,7 +17,7 @@ class MomentoViagemBuilderSpec extends Specification {
     void setup(){
 
         viagemService = Mock(ViagemService){
-            obterAlocacaoDaViagem(_) >> new Alocacao()
+            obterViagem(_) >> new Viagem(alocacao: new Alocacao())
         }
 
         trajetoService = Mock(TrajetoService){

@@ -4,7 +4,6 @@ import br.com.m2msolutions.copiloto.modelo.Regulacao
 import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.helpers.DateHelper
-import groovy.time.TimeCategory
 import groovy.time.TimeDuration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -21,16 +20,16 @@ class RegulacaoPorPlanejamento implements Regulacao {
         if(!situacaoViagem.alocacao)
             throw new RegulagemException('Não é possível regular por planejamento sem alocação')
 
-        def momentoDaPartida = situacaoViagem.alocacao.momentoDaPartida
+        def momentoDaAbertura = situacaoViagem.viagem.momentoDaAbertura
         def momentoPlanejadoDaChegada = situacaoViagem.alocacao.chegadaPlanejada
         def percentualConclusao = situacaoViagem.percentualDeConclusao
         def momentoDaTransmissao = situacaoViagem.momentoDaTransmissao
 
-        def duracaoEstimadaDoTrajeto = calcularDuracaoEstimadaDoTrajeto momentoDaPartida, momentoPlanejadoDaChegada
+        def duracaoEstimadaDoTrajeto = calcularDuracaoEstimadaDoTrajeto momentoDaAbertura, momentoPlanejadoDaChegada
 
         def tempoGastoIdeal = calcularTempoGastoIdeal percentualConclusao, duracaoEstimadaDoTrajeto
 
-        def tempoGasto =  calcularTempoGastoNoTrajeto momentoDaPartida, momentoDaTransmissao
+        def tempoGasto =  calcularTempoGastoNoTrajeto momentoDaAbertura, momentoDaTransmissao
 
         dateUtil.calcularDiferenca tempoGasto, tempoGastoIdeal
     }

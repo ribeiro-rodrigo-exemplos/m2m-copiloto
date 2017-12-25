@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto.modelo.planejamento
 
-import br.com.m2msolutions.copiloto.builder.AlocacaoBuilder
+import br.com.m2msolutions.copiloto.builder.ViagemBuilder
 import br.com.m2msolutions.copiloto.builder.TransmissaoBuilder
 import br.com.m2msolutions.copiloto.helpers.NumberHelper
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
@@ -15,7 +15,7 @@ import spock.lang.Specification
 class RegulacaoPorPlanejamentoSpec extends Specification {
 
     MomentoViagemBuilder momentoBuilder
-    AlocacaoBuilder alocacaoBuilder
+    ViagemBuilder viagemBuilder
     TransmissaoBuilder transmissaoBuilder
     ViagemService viagemService
 
@@ -24,7 +24,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
     def setup(){
 
-        alocacaoBuilder = new AlocacaoBuilder()
+        viagemBuilder = new ViagemBuilder()
 
         viagemService = Mock ViagemService
         momentoBuilder = new MomentoViagemBuilder(viagemService: viagemService)
@@ -40,7 +40,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
+            def viagem = viagemBuilder
                                 .planejadaPara(new Date())
                                 .comMinutosDeDuracao(60)
                                 .iniciouComMinutosDeAtraso(5)
@@ -49,7 +49,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                                            .emViagemComAlocacao(alocacao)
+                                            .emViagem(viagem)
                                             .transmitiuAposTempoDeViagem(7)
 
         and: 'Criando um instante da viagem'
@@ -72,7 +72,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             6.45 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -80,7 +80,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
+            def viagem = viagemBuilder
                                 .planejadaPara(new Date())
                                 .comMinutosDeDuracao(60)
                                 .iniciouComMinutosDeAtraso(21)
@@ -89,7 +89,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                                            .emViagemComAlocacao(alocacao)
+                                            .emViagem(viagem)
                                             .transmitiuAposTempoDeViagem(14)
 
         and: 'Criando um instante da viagem'
@@ -112,7 +112,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             -8.14 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -120,7 +120,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
+            def viagem = viagemBuilder
                                 .planejadaPara(new Date())
                                 .comMinutosDeDuracao(60)
                                 .iniciouComMinutosDeAtraso(10)
@@ -129,7 +129,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                                            .emViagemComAlocacao(alocacao)
+                                            .emViagem(viagem)
                                             .transmitiuAposTempoDeViagem(25)
 
         and: 'Criando um instante da viagem'
@@ -152,7 +152,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             0.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -160,7 +160,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
+            def viagem = viagemBuilder
                                 .planejadaPara(new Date())
                                 .comMinutosDeDuracao(60)
                                 .iniciouComMinutosDeAtraso(10)
@@ -169,7 +169,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                                            .emViagemComAlocacao(alocacao)
+                                            .emViagem(viagem)
                                             .transmitiuAposTempoDeViagem(25)
 
         and: 'Criando um instante da viagem'
@@ -192,7 +192,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             1.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -200,7 +200,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
+            def viagem = viagemBuilder
                                 .planejadaPara(new Date())
                                 .comMinutosDeDuracao(60)
                                 .iniciouComMinutosDeAtraso(10)
@@ -209,7 +209,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                                            .emViagemComAlocacao(alocacao)
+                                            .emViagem(viagem)
                                             .transmitiuAposTempoDeViagem(26)
 
         and: 'Criando um instante da viagem'
@@ -232,7 +232,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> alocacao
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             -1.0 == emMinutosESegundos(tempoRegulado)
 
     }
@@ -241,16 +241,14 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         given: 'Criando alocação da viagem'
 
-            def alocacao = alocacaoBuilder
-                                .planejadaPara(new Date())
-                                .comMinutosDeDuracao(60)
-                                .iniciouComMinutosDeAtraso(10)
+            def viagem = viagemBuilder
+                                .iniciouEm(new Date())
                                 .criar()
 
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                    .emViagemComAlocacao(alocacao)
+                    .emViagem(viagem)
                     .transmitiuAposTempoDeViagem(25)
 
         and: 'Criando um instante da viagem'
@@ -273,7 +271,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterAlocacaoDaViagem('5a3f8f13e4b0332c0ae45e81') >> null
+            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
             thrown(RegulagemException)
     }
 

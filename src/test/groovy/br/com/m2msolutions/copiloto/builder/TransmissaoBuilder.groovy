@@ -1,20 +1,20 @@
 package br.com.m2msolutions.copiloto.builder
 
-import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
+import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
 import groovy.time.TimeCategory
 
 class TransmissaoBuilder {
 
-    private Alocacao alocacao
+    private Viagem viagem
 
-    TransmissaoBuilder emViagemComAlocacao(Alocacao alocacao){
-        this.alocacao = alocacao
+    TransmissaoBuilder emViagem(Viagem viagem){
+        this.viagem = viagem
         this
     }
 
     Date transmitiuAposTempoDeViagem(Integer minutosTramissao,Integer segundosTransmissao = 0){
         use(TimeCategory){
-            alocacao.momentoDaPartida + minutosTramissao.minutes + segundosTransmissao.seconds
+            viagem.momentoDaAbertura + minutosTramissao.minutes + segundosTransmissao.seconds
         }
     }
 }

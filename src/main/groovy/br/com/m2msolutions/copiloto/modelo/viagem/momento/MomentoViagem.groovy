@@ -3,6 +3,7 @@ package br.com.m2msolutions.copiloto.modelo.viagem.momento
 import br.com.m2msolutions.copiloto.modelo.Trajeto
 import br.com.m2msolutions.copiloto.modelo.Veiculo
 import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
+import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
 import br.com.m2msolutions.copiloto.servico.TrajetoService
 import br.com.m2msolutions.copiloto.servico.ViagemService
 import groovy.transform.PackageScope
@@ -13,7 +14,7 @@ class MomentoViagem {
     BigDecimal percentualDeConclusao
     Veiculo veiculo
 
-    private Alocacao alocacao
+    private Viagem viagem
     private String linhaId
     private String viagemId
     private String trajetoId
@@ -46,10 +47,14 @@ class MomentoViagem {
     }
 
     Alocacao getAlocacao(){
-        if(!alocacao)
-            alocacao = viagemService.obterAlocacaoDaViagem viagemId
+        getViagem()?.alocacao
+    }
 
-        alocacao
+    Viagem getViagem(){
+        if(!viagem)
+            viagem = viagemService.obterViagem viagemId
+
+        viagem
     }
 
     Trajeto getTrajeto(){
