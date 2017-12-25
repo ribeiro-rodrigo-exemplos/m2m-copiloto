@@ -1,6 +1,5 @@
 package br.com.m2msolutions.copiloto.config
 
-import br.com.m2msolutions.copiloto.helpers.hazelcast.portable.CopilotoPortableFactory
 import com.hazelcast.client.HazelcastClient
 import com.hazelcast.client.config.ClientConfig
 import com.hazelcast.core.HazelcastInstance
@@ -18,11 +17,6 @@ class HazelcastConfig {
     def instances = []
 
     @Bean
-    CopilotoPortableFactory copilotoPortableFactory(){
-        new CopilotoPortableFactory()
-    }
-
-    @Bean
     ClientConfig clientConfig(){
 
         def config = new ClientConfig()
@@ -34,8 +28,8 @@ class HazelcastConfig {
                 .setName("dev")
                 .setPassword("dev-pass")
 
-        config.getSerializationConfig()
-                .addPortableFactory(1,copilotoPortableFactory())
+        /*config.getSerializationConfig()
+                .addPortableFactory(1,copilotoPortableFactory())*/
 
         config
     }
