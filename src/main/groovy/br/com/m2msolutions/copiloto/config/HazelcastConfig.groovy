@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = 'hazelcast')
 class HazelcastConfig {
 
-    def instances = []
+    def cacheInstances = []
 
     @Bean
     ClientConfig clientConfig(){
@@ -22,20 +22,17 @@ class HazelcastConfig {
         def config = new ClientConfig()
 
         config.getNetworkConfig()
-                    .addAddress(*instances)
+                    .addAddress(*cacheInstances)
 
         config.getGroupConfig()
                 .setName("dev")
                 .setPassword("dev-pass")
 
-        /*config.getSerializationConfig()
-                .addPortableFactory(1,copilotoPortableFactory())*/
-
         config
     }
 
     @Bean
-    HazelcastInstance hazelcastInstance(){
+    HazelcastInstance hazelcastCacheInstance(){
         HazelcastClient.newHazelcastClient(clientConfig())
     }
 }

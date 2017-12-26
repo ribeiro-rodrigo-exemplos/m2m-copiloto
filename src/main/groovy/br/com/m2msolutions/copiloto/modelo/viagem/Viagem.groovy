@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
 @Document(collection = 'VeiculosEmViagem')
-class Viagem {
+class Viagem implements Serializable {
 
     @Field('idViagemAtual')
     String idViagem
