@@ -1,6 +1,7 @@
 package br.com.m2msolutions.copiloto.servico
 
 import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
+import br.com.m2msolutions.copiloto.repositorio.ViagemExecutadaRepository
 import br.com.m2msolutions.copiloto.repositorio.ViagemRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,6 +16,8 @@ class ViagemService {
 
     @Autowired
     ViagemRepository viagemRepository
+    @Autowired
+    ViagemExecutadaRepository viagemExecutadaRepository
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
@@ -23,8 +26,15 @@ class ViagemService {
 
         def viagem = viagemRepository.findByIdVeiculo veiculoId
 
-        if(!viagem)
+        if(!viagem){
             logger.warn "Viagem do veiculo ${veiculoId} nao foi encontrada."
+            return null
+        }
+
+        if(!viagem.momentoDaAbertura){
+            def viagemExecutada = viagemExecutadaRepository.findOne viagem.idViagem
+            viagem.momentoDaAbertura = viagemExecutada?.dataInicio
+        }
 
         viagem
     }
