@@ -5,6 +5,7 @@ import br.com.m2msolutions.copiloto.led.CopilotoLed
 import br.com.m2msolutions.copiloto.modelo.Regulacao
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.helpers.DateHelper
+import br.com.m2msolutions.copiloto.servico.WebSocketService
 import groovy.time.TimeDuration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -18,6 +19,8 @@ class ReguladorDeViagem {
     NumberHelper numberHelper
     @Autowired
     CopilotoLed copilotoLed
+    @Autowired
+    WebSocketService webSocketService
 
     Regulagem regular(MomentoViagem momentoViagem,Regulacao algoritmo){
 
@@ -32,6 +35,8 @@ class ReguladorDeViagem {
             momentoViagem?.veiculo?.modulo?.identificador,
             regulagem.tempoReguladoEmMinutosESegundos()
         )
+
+        webSocketService.enviarRegulagem(momentoViagem.veiculo.veiculoId,regulagem)
 
         regulagem
     }
