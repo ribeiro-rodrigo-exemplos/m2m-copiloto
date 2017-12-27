@@ -18,31 +18,21 @@ public interface RegulagemRequestOrBuilder extends
   int getIdVeiculo();
 
   /**
-   * <code>string idViagem = 3;</code>
-   */
-  java.lang.String getIdViagem();
-  /**
-   * <code>string idViagem = 3;</code>
-   */
-  com.google.protobuf.ByteString
-      getIdViagemBytes();
-
-  /**
-   * <code>string idLinha = 4;</code>
+   * <code>string idLinha = 3;</code>
    */
   java.lang.String getIdLinha();
   /**
-   * <code>string idLinha = 4;</code>
+   * <code>string idLinha = 3;</code>
    */
   com.google.protobuf.ByteString
       getIdLinhaBytes();
 
   /**
-   * <code>string idTrajeto = 5;</code>
+   * <code>string idTrajeto = 4;</code>
    */
   java.lang.String getIdTrajeto();
   /**
-   * <code>string idTrajeto = 5;</code>
+   * <code>string idTrajeto = 4;</code>
    */
   com.google.protobuf.ByteString
       getIdTrajetoBytes();

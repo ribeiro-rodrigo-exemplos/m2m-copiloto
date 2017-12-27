@@ -18,7 +18,6 @@ private static final long serialVersionUID = 0L;
   private RegulagemRequest() {
     idCliente_ = 0;
     idVeiculo_ = 0;
-    idViagem_ = "";
     idLinha_ = "";
     idTrajeto_ = "";
     modeloModulo_ = "";
@@ -68,16 +67,10 @@ private static final long serialVersionUID = 0L;
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            idViagem_ = s;
-            break;
-          }
-          case 34: {
-            java.lang.String s = input.readStringRequireUtf8();
-
             idLinha_ = s;
             break;
           }
-          case 42: {
+          case 34: {
             java.lang.String s = input.readStringRequireUtf8();
 
             idTrajeto_ = s;
@@ -147,44 +140,10 @@ private static final long serialVersionUID = 0L;
     return idVeiculo_;
   }
 
-  public static final int IDVIAGEM_FIELD_NUMBER = 3;
-  private volatile java.lang.Object idViagem_;
-  /**
-   * <code>string idViagem = 3;</code>
-   */
-  public java.lang.String getIdViagem() {
-    java.lang.Object ref = idViagem_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      idViagem_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string idViagem = 3;</code>
-   */
-  public com.google.protobuf.ByteString
-      getIdViagemBytes() {
-    java.lang.Object ref = idViagem_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      idViagem_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int IDLINHA_FIELD_NUMBER = 4;
+  public static final int IDLINHA_FIELD_NUMBER = 3;
   private volatile java.lang.Object idLinha_;
   /**
-   * <code>string idLinha = 4;</code>
+   * <code>string idLinha = 3;</code>
    */
   public java.lang.String getIdLinha() {
     java.lang.Object ref = idLinha_;
@@ -199,7 +158,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string idLinha = 4;</code>
+   * <code>string idLinha = 3;</code>
    */
   public com.google.protobuf.ByteString
       getIdLinhaBytes() {
@@ -215,10 +174,10 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int IDTRAJETO_FIELD_NUMBER = 5;
+  public static final int IDTRAJETO_FIELD_NUMBER = 4;
   private volatile java.lang.Object idTrajeto_;
   /**
-   * <code>string idTrajeto = 5;</code>
+   * <code>string idTrajeto = 4;</code>
    */
   public java.lang.String getIdTrajeto() {
     java.lang.Object ref = idTrajeto_;
@@ -233,7 +192,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string idTrajeto = 5;</code>
+   * <code>string idTrajeto = 4;</code>
    */
   public com.google.protobuf.ByteString
       getIdTrajetoBytes() {
@@ -353,14 +312,11 @@ private static final long serialVersionUID = 0L;
     if (idVeiculo_ != 0) {
       output.writeInt32(2, idVeiculo_);
     }
-    if (!getIdViagemBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, idViagem_);
-    }
     if (!getIdLinhaBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, idLinha_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, idLinha_);
     }
     if (!getIdTrajetoBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, idTrajeto_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, idTrajeto_);
     }
     if (!getModeloModuloBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 6, modeloModulo_);
@@ -390,14 +346,11 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, idVeiculo_);
     }
-    if (!getIdViagemBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, idViagem_);
-    }
     if (!getIdLinhaBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, idLinha_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, idLinha_);
     }
     if (!getIdTrajetoBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, idTrajeto_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, idTrajeto_);
     }
     if (!getModeloModuloBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, modeloModulo_);
@@ -433,8 +386,6 @@ private static final long serialVersionUID = 0L;
         == other.getIdCliente());
     result = result && (getIdVeiculo()
         == other.getIdVeiculo());
-    result = result && getIdViagem()
-        .equals(other.getIdViagem());
     result = result && getIdLinha()
         .equals(other.getIdLinha());
     result = result && getIdTrajeto()
@@ -464,8 +415,6 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getIdCliente();
     hash = (37 * hash) + IDVEICULO_FIELD_NUMBER;
     hash = (53 * hash) + getIdVeiculo();
-    hash = (37 * hash) + IDVIAGEM_FIELD_NUMBER;
-    hash = (53 * hash) + getIdViagem().hashCode();
     hash = (37 * hash) + IDLINHA_FIELD_NUMBER;
     hash = (53 * hash) + getIdLinha().hashCode();
     hash = (37 * hash) + IDTRAJETO_FIELD_NUMBER;
@@ -613,8 +562,6 @@ private static final long serialVersionUID = 0L;
 
       idVeiculo_ = 0;
 
-      idViagem_ = "";
-
       idLinha_ = "";
 
       idTrajeto_ = "";
@@ -651,7 +598,6 @@ private static final long serialVersionUID = 0L;
       br.com.m2msolutions.copiloto.grpc.RegulagemRequest result = new br.com.m2msolutions.copiloto.grpc.RegulagemRequest(this);
       result.idCliente_ = idCliente_;
       result.idVeiculo_ = idVeiculo_;
-      result.idViagem_ = idViagem_;
       result.idLinha_ = idLinha_;
       result.idTrajeto_ = idTrajeto_;
       result.modeloModulo_ = modeloModulo_;
@@ -704,10 +650,6 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getIdVeiculo() != 0) {
         setIdVeiculo(other.getIdVeiculo());
-      }
-      if (!other.getIdViagem().isEmpty()) {
-        idViagem_ = other.idViagem_;
-        onChanged();
       }
       if (!other.getIdLinha().isEmpty()) {
         idLinha_ = other.idLinha_;
@@ -810,78 +752,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object idViagem_ = "";
-    /**
-     * <code>string idViagem = 3;</code>
-     */
-    public java.lang.String getIdViagem() {
-      java.lang.Object ref = idViagem_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        idViagem_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string idViagem = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIdViagemBytes() {
-      java.lang.Object ref = idViagem_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        idViagem_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string idViagem = 3;</code>
-     */
-    public Builder setIdViagem(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      idViagem_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string idViagem = 3;</code>
-     */
-    public Builder clearIdViagem() {
-      
-      idViagem_ = getDefaultInstance().getIdViagem();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string idViagem = 3;</code>
-     */
-    public Builder setIdViagemBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      idViagem_ = value;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object idLinha_ = "";
     /**
-     * <code>string idLinha = 4;</code>
+     * <code>string idLinha = 3;</code>
      */
     public java.lang.String getIdLinha() {
       java.lang.Object ref = idLinha_;
@@ -896,7 +769,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string idLinha = 4;</code>
+     * <code>string idLinha = 3;</code>
      */
     public com.google.protobuf.ByteString
         getIdLinhaBytes() {
@@ -912,7 +785,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string idLinha = 4;</code>
+     * <code>string idLinha = 3;</code>
      */
     public Builder setIdLinha(
         java.lang.String value) {
@@ -925,7 +798,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string idLinha = 4;</code>
+     * <code>string idLinha = 3;</code>
      */
     public Builder clearIdLinha() {
       
@@ -934,7 +807,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string idLinha = 4;</code>
+     * <code>string idLinha = 3;</code>
      */
     public Builder setIdLinhaBytes(
         com.google.protobuf.ByteString value) {
@@ -950,7 +823,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object idTrajeto_ = "";
     /**
-     * <code>string idTrajeto = 5;</code>
+     * <code>string idTrajeto = 4;</code>
      */
     public java.lang.String getIdTrajeto() {
       java.lang.Object ref = idTrajeto_;
@@ -965,7 +838,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string idTrajeto = 5;</code>
+     * <code>string idTrajeto = 4;</code>
      */
     public com.google.protobuf.ByteString
         getIdTrajetoBytes() {
@@ -981,7 +854,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string idTrajeto = 5;</code>
+     * <code>string idTrajeto = 4;</code>
      */
     public Builder setIdTrajeto(
         java.lang.String value) {
@@ -994,7 +867,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string idTrajeto = 5;</code>
+     * <code>string idTrajeto = 4;</code>
      */
     public Builder clearIdTrajeto() {
       
@@ -1003,7 +876,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string idTrajeto = 5;</code>
+     * <code>string idTrajeto = 4;</code>
      */
     public Builder setIdTrajetoBytes(
         com.google.protobuf.ByteString value) {

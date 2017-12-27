@@ -77,7 +77,6 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
                 .criarMomento()
                     .naLinha(request.getIdLinha())
                     .doCliente(request.getIdCliente())
-                    .emViagem(request.getIdViagem())
                     .noTrajeto(request.getIdTrajeto())
                     .comPercentualDeConclusao(request.getPercentualConclusao())
                     .comVeiculo(request.getIdVeiculo())
