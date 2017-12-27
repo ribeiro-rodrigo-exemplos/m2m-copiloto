@@ -8,6 +8,8 @@ class Viagem implements Serializable {
 
     @Field('idViagemAtual')
     String idViagem
+    @Field('idVeiculo')
+    Integer idVeiculo
     @Field('dtUltimaViagem')
     Date momentoDaAbertura
     @Field('planejada')

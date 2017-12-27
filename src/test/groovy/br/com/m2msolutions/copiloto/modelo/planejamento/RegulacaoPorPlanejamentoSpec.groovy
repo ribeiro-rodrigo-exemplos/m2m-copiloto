@@ -72,7 +72,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             6.45 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -112,7 +112,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             -8.14 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -152,7 +152,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             0.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -192,7 +192,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             1.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -232,7 +232,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             -1.0 == emMinutosESegundos(tempoRegulado)
 
     }
@@ -271,7 +271,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagem('5a3f8f13e4b0332c0ae45e81') >> viagem
+            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
             thrown(RegulagemException)
     }
 

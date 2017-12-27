@@ -19,12 +19,12 @@ class ViagemService {
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
     @Cacheable
-    Viagem obterViagem(String viagemId){
+    Viagem obterViagemDoVeiculo(Integer veiculoId){
 
-        def viagem = viagemRepository.findByIdViagem viagemId
+        def viagem = viagemRepository.findByIdVeiculo veiculoId
 
         if(!viagem)
-            logger.warn "Viagem ${viagemId} nao encontrada."
+            logger.warn "Viagem do veiculo ${veiculoId} nao foi encontrada."
 
         viagem
     }

@@ -52,7 +52,8 @@ class MomentoViagem {
 
     Viagem getViagem(){
         if(!viagem)
-            viagem = viagemService.obterViagem viagemId
+            viagem = viagemService.obterViagemDoVeiculo veiculo.veiculoId
+            //viagem = viagemService.obterViagem veiculo.veiculoId
 
         viagem
     }
