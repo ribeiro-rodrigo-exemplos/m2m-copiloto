@@ -16,17 +16,6 @@ class DateHelper {
     @Autowired
     NumberHelper numberHelper
 
-    Date criarInstanteDoDia(Date dia, Time tempo){
-
-        def data = dia.clone() as Date
-
-        data[HOUR_OF_DAY] = tempo[HOUR_OF_DAY]
-        data[MINUTE] = tempo[MINUTE]
-        data[SECOND] = tempo[SECOND]
-
-        data
-    }
-
     Date converter(Long timeMillis){
         new Date(timeMillis)
     }
@@ -37,7 +26,17 @@ class DateHelper {
 
     TimeDuration calcularDiferenca(Date dataInicial, Date dataFinal){
         use(TimeCategory){
-            dataFinal - dataInicial
+            def diferenca = dataFinal - dataInicial
+
+            if(diferenca.hours){
+                def horas = diferenca.hours
+                def minutos = diferenca.minutes
+                def segundos = diferenca.seconds
+
+                return ((horas * 60).minutes + minutos.minutes + segundos.seconds) as TimeDuration
+            }
+
+            diferenca
         }
     }
 
@@ -79,7 +78,7 @@ class DateHelper {
 
         if(duracao.seconds){
             segundos = duracao.seconds.div 100
-            if(numberHelper.ehNegativo(duracao.minutes))
+            if(numberHelper.ehNegativo(duracao.minutes) && numberHelper.ehPositivo(duracao.seconds))
                 segundos = -segundos
         }
             duracao.minutes + segundos
