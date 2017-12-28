@@ -10,21 +10,26 @@ import org.springframework.web.socket.WebSocketHandler
 import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.WebSocketSession
 
+import javax.jms.Session
+import java.util.concurrent.CopyOnWriteArrayList
+
 @Component
 class WebSocketService implements WebSocketHandler {
 
-    def sessions = [:]
+    def final sessionsMap = [:]
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
     void enviarRegulagem(Integer idVeiculo,Regulagem regulagem){
-        try {
-            def sessao = sessions[idVeiculo] as WebSocketSession
-            if (sessao.isOpen())
-                sessao.sendMessage(new TextMessage('regulagem realizada'))
-        }
-        catch (Exception e){
-            println "${e} ---- "
+
+        def sessionsList = sessionsMap[idVeiculo] as CopyOnWriteArrayList
+
+        def iterator = sessionsList?.iterator()
+
+        iterator?.each {
+            WebSocketSession session ->
+                if (session.isOpen())
+                    session.sendMessage(new TextMessage('regulagem realizada'))
         }
 
     }
@@ -36,8 +41,10 @@ class WebSocketService implements WebSocketHandler {
 
         def idVeiculo = obterIdDoVeiculo session.uri.path
 
+        session.attributes['idVeiculo'] = idVeiculo
+
         if(idVeiculo)
-            sessions[idVeiculo] = session
+            adicionarSessao(idVeiculo,session)
         else
             session.close(CloseStatus.NORMAL)
     }
@@ -55,11 +62,33 @@ class WebSocketService implements WebSocketHandler {
     @Override
     void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         logger.info "Sessão WebSocket finalizada ${session.id}, URI: ${session.uri.path}, Status: ${closeStatus.code}"
+        removerSessao session
     }
 
     @Override
     boolean supportsPartialMessages() {
         return false
+    }
+
+    private void removerSessao(WebSocketSession session){
+        synchronized (sessionsMap){
+
+            def sessionsList = sessionsMap[session.attributes['idVeiculo']] as List
+            sessionsList.remove session
+
+            if(!sessionsList)
+                sessionsMap.remove(session.attributes['idVeiculo'])
+        }
+    }
+
+    private void adicionarSessao(Integer idVeiculo,WebSocketSession session){
+
+        synchronized (sessionsMap){
+            if(!sessionsMap[idVeiculo])
+                sessionsMap[idVeiculo] = new CopyOnWriteArrayList<WebSocketSession>()
+
+            sessionsMap[idVeiculo] << session
+        }
     }
 
     private Integer obterIdDoVeiculo(String path){
