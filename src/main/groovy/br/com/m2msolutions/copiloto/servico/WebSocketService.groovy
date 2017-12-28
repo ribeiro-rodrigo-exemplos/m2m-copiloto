@@ -10,7 +10,6 @@ import org.springframework.web.socket.WebSocketHandler
 import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.WebSocketSession
 
-import javax.jms.Session
 import java.util.concurrent.CopyOnWriteArrayList
 
 @Component
