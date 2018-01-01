@@ -3,15 +3,6 @@ application:
   version: @version@
 
 spring:
-  datasource:
-    url: jdbc:mysql://mysql-hml:3306/frota_znh
-    username: frota
-    password: frota
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: validate
-      dialect: org.hibernate.dialect.MySQL5Dialect
   output:
     ansi:
       enabled: ALWAYS
