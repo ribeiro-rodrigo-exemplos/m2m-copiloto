@@ -4,7 +4,7 @@ import br.com.m2msolutions.copiloto.builder.ViagemBuilder
 import br.com.m2msolutions.copiloto.builder.TransmissaoBuilder
 import br.com.m2msolutions.copiloto.helpers.NumberHelper
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
-import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
+import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.servico.ViagemService

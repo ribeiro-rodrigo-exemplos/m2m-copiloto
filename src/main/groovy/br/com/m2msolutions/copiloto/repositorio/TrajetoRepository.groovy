@@ -9,9 +9,6 @@ import org.springframework.data.mongodb.core.query.BasicQuery
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.stereotype.Repository
 
-/**
- * Created by rodrigo on 23/11/17.
- */
 @Repository
 class TrajetoRepository{
 

@@ -5,9 +5,9 @@ import br.com.m2msolutions.copiloto.grpc.RegulagemRequest
 import br.com.m2msolutions.copiloto.grpc.RegulagemResponse
 import br.com.m2msolutions.copiloto.grpc.RegulagemResult
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
-import br.com.m2msolutions.copiloto.modelo.viagem.ReguladorDeViagem
-import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
-import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
+import br.com.m2msolutions.copiloto.modelo.regulacao.ReguladorDeViagem
+import br.com.m2msolutions.copiloto.modelo.regulacao.Regulagem
+import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.helpers.DateHelper
@@ -29,7 +29,7 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
     @Autowired
     ReguladorDeViagem reguladorDeViagem
     @Autowired
-    DateHelper dateUtil
+    DateHelper dateHelper
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
@@ -81,14 +81,14 @@ class RegulagemService extends RegulacaoGrpc.RegulacaoImplBase {
                     .comPercentualDeConclusao(request.getPercentualConclusao())
                     .comVeiculo(request.getIdVeiculo())
                     .comModulo(new Modulo(modelo: request.getModeloModulo(),identificador: request.getIdentificadorModulo()))
-                    .transmitiuEm(dateUtil.converter(request.getDataHoraTransmissao()))
+                    .transmitiuEm(dateHelper.converter(request.getDataHoraTransmissao()))
                 .criar()
     }
 
     private RegulagemResponse criarResposta(Regulagem regulagem){
 
         RegulagemResult result = RegulagemResult.newBuilder()
-                                            .setTempoRegulado(regulagem ? regulagem.tempoReguladoEmMinutosESegundos() : new Double(0.0))
+                                            .setTempoRegulado(regulagem ? regulagem.getTempoRegulado() : new Double(0.0))
                                             .setDataHoraRegulagem(0l)
                                             .setRegulagemRealizada(regulagem != null)
                                             .build()

@@ -1,4 +1,4 @@
-package br.com.m2msolutions.copiloto.modelo
+package br.com.m2msolutions.copiloto.modelo.regulacao
 
 import br.com.m2msolutions.copiloto.modelo.planejamento.RegulacaoPorPlanejamento
 

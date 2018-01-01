@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.modelo.TipoRegulacao
+import br.com.m2msolutions.copiloto.modelo.regulacao.TipoRegulacao
 import br.com.m2msolutions.copiloto.modelo.planejamento.RegulacaoPorPlanejamento
 import org.springframework.context.ApplicationContext
 import spock.lang.Specification

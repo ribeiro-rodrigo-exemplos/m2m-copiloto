@@ -1,4 +1,4 @@
-package br.com.m2msolutions.copiloto
+package br.com.m2msolutions.copiloto.infra
 
 import br.com.m2msolutions.copiloto.servico.RegulagemService
 import io.grpc.Server
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 class GrpcServer {
 
     @Autowired
-    RegulagemService copilotoService
+    RegulagemService regulagemService
     Server server
 
     @Value('${grpc.port}')
@@ -39,7 +39,7 @@ class GrpcServer {
 
     private Server build(){
         def builder = ServerBuilder.forPort port
-        builder.addService copilotoService
+        builder.addService regulagemService
         builder.build()
     }
 }

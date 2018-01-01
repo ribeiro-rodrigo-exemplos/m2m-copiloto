@@ -1,4 +1,4 @@
-package br.com.m2msolutions.copiloto.modelo.viagem
+package br.com.m2msolutions.copiloto.modelo.regulacao
 
 /**
  * Created by rodrigo on 28/11/17.

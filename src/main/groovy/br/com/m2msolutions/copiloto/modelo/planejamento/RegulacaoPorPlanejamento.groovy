@@ -1,7 +1,8 @@
 package br.com.m2msolutions.copiloto.modelo.planejamento
 
-import br.com.m2msolutions.copiloto.modelo.Regulacao
-import br.com.m2msolutions.copiloto.modelo.viagem.RegulagemException
+import br.com.m2msolutions.copiloto.modelo.regulacao.Regulacao
+import br.com.m2msolutions.copiloto.modelo.regulacao.TipoRegulacao
+import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.helpers.DateHelper
 import groovy.time.TimeDuration
@@ -15,15 +16,15 @@ class RegulacaoPorPlanejamento implements Regulacao {
     DateHelper dateUtil
 
     @Override
-    TimeDuration regular(MomentoViagem situacaoViagem) {
+    TimeDuration regular(MomentoViagem momentoViagem) {
 
-        if(!situacaoViagem.alocacao)
+        if(!momentoViagem.alocacao)
             throw new RegulagemException('Não é possível regular por planejamento sem alocação')
 
-        def momentoDaAbertura = situacaoViagem.viagem.momentoDaAbertura
-        def momentoPlanejadoDaChegada = situacaoViagem.alocacao.chegadaPlanejada
-        def percentualConclusao = situacaoViagem.percentualDeConclusao
-        def momentoDaTransmissao = situacaoViagem.momentoDaTransmissao
+        def momentoDaAbertura = momentoViagem.viagem.momentoDaAbertura
+        def momentoPlanejadoDaChegada = momentoViagem.alocacao.chegadaPlanejada
+        def percentualConclusao = momentoViagem.percentualDeConclusao
+        def momentoDaTransmissao = momentoViagem.momentoDaTransmissao
 
         def duracaoEstimadaDoTrajeto = calcularDuracaoEstimadaDoTrajeto momentoDaAbertura, momentoPlanejadoDaChegada
 
@@ -32,6 +33,11 @@ class RegulacaoPorPlanejamento implements Regulacao {
         def tempoGasto =  calcularTempoGastoNoTrajeto momentoDaAbertura, momentoDaTransmissao
 
         dateUtil.calcularDiferenca tempoGasto, tempoGastoIdeal
+    }
+
+    @Override
+    TipoRegulacao obterTipo() {
+        return TipoRegulacao.PLANEJAMENTO
     }
 
     private TimeDuration calcularDuracaoEstimadaDoTrajeto(Date dataHoraPartida, Date dataHoraChegadaPlanejada){

@@ -1,6 +1,5 @@
-package br.com.m2msolutions.copiloto.servico
+package br.com.m2msolutions.copiloto.infra
 
-import br.com.m2msolutions.copiloto.modelo.viagem.Regulagem
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -9,28 +8,26 @@ import org.springframework.web.socket.TextMessage
 import org.springframework.web.socket.WebSocketHandler
 import org.springframework.web.socket.WebSocketMessage
 import org.springframework.web.socket.WebSocketSession
-
 import java.util.concurrent.CopyOnWriteArrayList
 
 @Component
-class WebSocketService implements WebSocketHandler {
+class WebSocket implements WebSocketHandler {
 
-    def final sessionsMap = [:]
+    private final sessionsMap = [:]
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
-    void enviarRegulagem(Integer idVeiculo,Regulagem regulagem){
+    void enviarMensagem(Integer veiculoId,String mensagem){
 
-        def sessionsList = sessionsMap[idVeiculo] as CopyOnWriteArrayList
+        def sessionsList = sessionsMap[veiculoId] as CopyOnWriteArrayList
 
         def iterator = sessionsList?.iterator()
 
         iterator?.each {
             WebSocketSession session ->
                 if (session.isOpen())
-                    session.sendMessage(new TextMessage('regulagem realizada'))
+                    session.sendMessage(new TextMessage(mensagem))
         }
-
     }
 
     @Override

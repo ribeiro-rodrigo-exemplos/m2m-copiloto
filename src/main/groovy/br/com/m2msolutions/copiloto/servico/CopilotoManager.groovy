@@ -1,7 +1,7 @@
 package br.com.m2msolutions.copiloto.servico
 
-import br.com.m2msolutions.copiloto.modelo.Regulacao
-import br.com.m2msolutions.copiloto.modelo.TipoRegulacao
+import br.com.m2msolutions.copiloto.modelo.regulacao.Regulacao
+import br.com.m2msolutions.copiloto.modelo.regulacao.TipoRegulacao
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Service
