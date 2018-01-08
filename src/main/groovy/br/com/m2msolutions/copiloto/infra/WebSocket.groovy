@@ -25,8 +25,13 @@ class WebSocket implements WebSocketHandler {
 
         iterator?.each {
             WebSocketSession session ->
-                if (session.isOpen())
-                    session.sendMessage(new TextMessage(mensagem))
+                try{
+                    if (session.isOpen())
+                        session.sendMessage(new TextMessage(mensagem))
+                }
+                catch (e){
+                    logger.error "Erro ao enviar mensagem para o veiculo ${veiculoId} - ${e.message}"
+                }
         }
     }
 

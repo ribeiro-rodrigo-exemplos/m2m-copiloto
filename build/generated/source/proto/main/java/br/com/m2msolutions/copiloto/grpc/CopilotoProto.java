@@ -15,6 +15,16 @@ public final class CopilotoProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NotificacaoRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NotificacaoRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NotificacaoResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NotificacaoResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_RegulagemRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -38,20 +48,26 @@ public final class CopilotoProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024proto/copiloto.proto\"\311\001\n\020RegulagemRequ" +
-      "est\022\021\n\tidCliente\030\001 \001(\005\022\021\n\tidVeiculo\030\002 \001(" +
-      "\005\022\017\n\007idLinha\030\003 \001(\t\022\021\n\tidTrajeto\030\004 \001(\t\022\024\n" +
-      "\014modeloModulo\030\006 \001(\t\022\033\n\023identificadorModu" +
-      "lo\030\007 \001(\t\022\033\n\023dataHoraTransmissao\030\010 \001(\003\022\033\n" +
-      "\023percentualConclusao\030\t \001(\002\"Q\n\021RegulagemR" +
-      "esponse\022 \n\006result\030\001 \001(\0132\020.RegulagemResul" +
-      "t\022\032\n\022copilotoHabilitado\030\002 \001(\010\"_\n\017Regulag" +
-      "emResult\022\025\n\rtempoRegulado\030\001 \001(\001\022\031\n\021dataH" +
-      "oraRegulagem\030\002 \001(\003\022\032\n\022regulagemRealizada",
-      "\030\003 \001(\0102?\n\tRegulacao\0222\n\007Regular\022\021.Regulag" +
-      "emRequest\032\022.RegulagemResponse\"\000B4\n!br.co" +
-      "m.m2msolutions.copiloto.grpcB\rCopilotoPr" +
-      "otoP\001b\006proto3"
+      "\n\024proto/copiloto.proto\"\213\001\n\022NotificacaoRe" +
+      "quest\022\021\n\tidCliente\030\001 \001(\005\022\021\n\tidVeiculo\030\002 " +
+      "\001(\005\022\017\n\007idLinha\030\003 \001(\t\022\021\n\tidTrajeto\030\004 \001(\t\022" +
+      "\025\n\rtempoRegulado\030\005 \001(\003\022\024\n\014distribuicao\030\006" +
+      " \001(\003\"1\n\023NotificacaoResponse\022\032\n\022notificac" +
+      "aoEnviada\030\001 \001(\010\"\311\001\n\020RegulagemRequest\022\021\n\t" +
+      "idCliente\030\001 \001(\005\022\021\n\tidVeiculo\030\002 \001(\005\022\017\n\007id" +
+      "Linha\030\003 \001(\t\022\021\n\tidTrajeto\030\004 \001(\t\022\024\n\014modelo" +
+      "Modulo\030\006 \001(\t\022\033\n\023identificadorModulo\030\007 \001(" +
+      "\t\022\033\n\023dataHoraTransmissao\030\010 \001(\003\022\033\n\023percen",
+      "tualConclusao\030\t \001(\002\"Q\n\021RegulagemResponse" +
+      "\022 \n\006result\030\001 \001(\0132\020.RegulagemResult\022\032\n\022co" +
+      "pilotoHabilitado\030\002 \001(\010\"_\n\017RegulagemResul" +
+      "t\022\025\n\rtempoRegulado\030\001 \001(\001\022\031\n\021dataHoraRegu" +
+      "lagem\030\002 \001(\003\022\032\n\022regulagemRealizada\030\003 \001(\0102" +
+      "?\n\tRegulacao\0222\n\007Regular\022\021.RegulagemReque" +
+      "st\032\022.RegulagemResponse\"\0002G\n\013Notificacao\022" +
+      "8\n\tNotificar\022\023.NotificacaoRequest\032\024.Noti" +
+      "ficacaoResponse\"\000B4\n!br.com.m2msolutions" +
+      ".copiloto.grpcB\rCopilotoProtoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -65,20 +81,32 @@ public final class CopilotoProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_RegulagemRequest_descriptor =
+    internal_static_NotificacaoRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_NotificacaoRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NotificacaoRequest_descriptor,
+        new java.lang.String[] { "IdCliente", "IdVeiculo", "IdLinha", "IdTrajeto", "TempoRegulado", "Distribuicao", });
+    internal_static_NotificacaoResponse_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_NotificacaoResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NotificacaoResponse_descriptor,
+        new java.lang.String[] { "NotificacaoEnviada", });
+    internal_static_RegulagemRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_RegulagemRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RegulagemRequest_descriptor,
         new java.lang.String[] { "IdCliente", "IdVeiculo", "IdLinha", "IdTrajeto", "ModeloModulo", "IdentificadorModulo", "DataHoraTransmissao", "PercentualConclusao", });
     internal_static_RegulagemResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_RegulagemResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RegulagemResponse_descriptor,
         new java.lang.String[] { "Result", "CopilotoHabilitado", });
     internal_static_RegulagemResult_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_RegulagemResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RegulagemResult_descriptor,

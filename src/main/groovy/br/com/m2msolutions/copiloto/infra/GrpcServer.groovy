@@ -1,5 +1,6 @@
 package br.com.m2msolutions.copiloto.infra
 
+import br.com.m2msolutions.copiloto.servico.DistanciaMinimaAdapterService
 import br.com.m2msolutions.copiloto.servico.RegulagemService
 import io.grpc.Server
 import io.grpc.ServerBuilder
@@ -14,6 +15,8 @@ class GrpcServer {
 
     @Autowired
     RegulagemService regulagemService
+    @Autowired
+    DistanciaMinimaAdapterService distanciaMinimaAdapterService
     Server server
 
     @Value('${grpc.port}')
@@ -40,6 +43,7 @@ class GrpcServer {
     private Server build(){
         def builder = ServerBuilder.forPort port
         builder.addService regulagemService
+        builder.addService distanciaMinimaAdapterService
         builder.build()
     }
 }

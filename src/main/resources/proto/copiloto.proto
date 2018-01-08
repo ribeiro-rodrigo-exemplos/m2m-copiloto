@@ -8,6 +8,23 @@ service Regulacao{
     rpc Regular(RegulagemRequest) returns (RegulagemResponse){}
 }
 
+service Notificacao{
+    rpc Notificar(NotificacaoRequest) returns (NotificacaoResponse){}
+}
+
+message NotificacaoRequest{
+    int32 idCliente = 1;
+    int32 idVeiculo = 2;
+    string idLinha = 3;
+    string idTrajeto = 4;
+    int64 tempoRegulado = 5;
+    int64 distribuicao = 6;
+}
+
+message NotificacaoResponse{
+    bool notificacaoEnviada = 1;
+}
+
 message RegulagemRequest{
     int32 idCliente = 1;
     int32 idVeiculo = 2;

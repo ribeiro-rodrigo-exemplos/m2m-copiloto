@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
 @Document
-class Alocacao{
+class Alocacao implements Serializable{
 
     @Field('dataInicio')
     Date partidaPlanejada

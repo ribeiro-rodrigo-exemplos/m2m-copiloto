@@ -6,4 +6,5 @@ class Veiculo {
     Modulo modulo
     Integer clienteId
     Integer veiculoId
+    Integer distribuicao
 }
