@@ -6,9 +6,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import groovy.time.TimeDuration
 
 class Regulagem {
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = 'yyyy-MM-dd HH:mm:ss')
-    Date momentoDaRegulagem = new Date()
     TimeDuration tempoRegulado
     TipoRegulacao tipoRegulacao
 

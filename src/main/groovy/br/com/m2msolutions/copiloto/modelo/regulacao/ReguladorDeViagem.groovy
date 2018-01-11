@@ -28,7 +28,8 @@ class ReguladorDeViagem {
 
         def regulagemEvent = new RegulagemEvent(
             regulagem:regulagem,
-            veiculo: momentoViagem.veiculo
+            veiculo: momentoViagem.veiculo,
+            momentoDaTransmissao: momentoViagem.momentoDaTransmissao
         )
 
         eventBus.post regulagemEvent
