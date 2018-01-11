@@ -12,4 +12,5 @@ class RegulagemEvent {
     Date momentoDaRegulagem = new Date()
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = 'yyyy-MM-dd HH:mm:ss')
     Date momentoDaTransmissao
+    Double percentualDeConclusao
 }
