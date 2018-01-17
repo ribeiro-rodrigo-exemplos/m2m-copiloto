@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto
 
-import br.com.m2msolutions.copiloto.infra.GrpcServer
+import br.com.m2msolutions.copiloto.infra.grpc.GrpcServer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component

@@ -1,7 +1,7 @@
 package br.com.m2msolutions.copiloto.servico.notificador
 
 import br.com.m2msolutions.copiloto.led.CopilotoLed
-import br.com.m2msolutions.copiloto.modelo.evento.RegulagemEvent
+import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemEvent
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,8 +1,8 @@
 package br.com.m2msolutions.copiloto.modelo.regulacao
 
-import br.com.m2msolutions.copiloto.modelo.evento.RegulagemEvent
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.helpers.DateHelper
+import br.com.m2msolutions.copiloto.repositorio.RegulagemRepository
 import com.google.common.eventbus.EventBus
 import groovy.time.TimeDuration
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,17 +12,18 @@ import org.springframework.stereotype.Component
 class ReguladorDeViagem {
 
     @Autowired
-    DateHelper dateUtil
+    DateHelper dateHelper
     @Autowired
     EventBus eventBus
+    @Autowired
+    RegulagemRepository regulagemRepository
 
     Regulagem regular(MomentoViagem momentoViagem, Regulacao algoritmo){
 
        TimeDuration tempoDeRegulagem = algoritmo.regular momentoViagem
 
         def regulagem = new Regulagem(
-            tempoRegulado: tempoDeRegulagem,
-            dateHelper: dateUtil,
+            tempoRegulado: dateHelper.obterMinutosESegundosEmNumeroReal(tempoDeRegulagem),
             tipoRegulacao: algoritmo.obterTipo(),
         )
 
@@ -34,6 +35,8 @@ class ReguladorDeViagem {
         )
 
         eventBus.post regulagemEvent
+
+        regulagemRepository.salvar regulagemEvent
 
         regulagem
     }

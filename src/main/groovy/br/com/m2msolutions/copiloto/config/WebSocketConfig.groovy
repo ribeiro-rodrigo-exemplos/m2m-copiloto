@@ -1,6 +1,6 @@
 package br.com.m2msolutions.copiloto.config
 
-import br.com.m2msolutions.copiloto.infra.WebSocket
+import br.com.m2msolutions.copiloto.infra.websocket.WebSocket
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.socket.config.annotation.EnableWebSocket

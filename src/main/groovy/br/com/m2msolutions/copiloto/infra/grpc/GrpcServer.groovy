@@ -1,4 +1,4 @@
-package br.com.m2msolutions.copiloto.infra
+package br.com.m2msolutions.copiloto.infra.grpc
 
 import br.com.m2msolutions.copiloto.servico.DistanciaMinimaAdapterService
 import br.com.m2msolutions.copiloto.servico.RegulagemService

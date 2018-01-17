@@ -5,7 +5,7 @@ import br.com.m2msolutions.copiloto.grpc.NotificacaoRequest
 import br.com.m2msolutions.copiloto.grpc.NotificacaoResponse
 import br.com.m2msolutions.copiloto.helpers.DateHelper
 import br.com.m2msolutions.copiloto.modelo.Veiculo
-import br.com.m2msolutions.copiloto.modelo.evento.RegulagemEvent
+import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemEvent
 import br.com.m2msolutions.copiloto.modelo.regulacao.Regulagem
 import br.com.m2msolutions.copiloto.modelo.regulacao.TipoRegulacao
 import br.com.m2msolutions.copiloto.servico.notificador.WebNotificador
@@ -41,8 +41,7 @@ class DistanciaMinimaAdapterService extends NotificacaoGrpc.NotificacaoImplBase 
 
         def regulagem = new Regulagem(
                 tipoRegulacao: TipoRegulacao.DISTANCIA_MINIMA,
-                tempoRegulado: tempoRegulado,
-                dateHelper: dateHelper
+                tempoRegulado: dateHelper.obterMinutosESegundosEmNumeroReal(tempoRegulado)
         )
 
         RegulagemEvent evento = new RegulagemEvent(regulagem: regulagem,veiculo: veiculo)
