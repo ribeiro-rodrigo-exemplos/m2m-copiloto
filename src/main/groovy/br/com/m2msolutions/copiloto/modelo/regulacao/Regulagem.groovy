@@ -12,4 +12,8 @@ class Regulagem implements Serializable {
     Double getTempoRegulado(){
         tempoRegulado
     }
+
+    Integer getTempoReguladoEmMinutos(){
+        tempoRegulado?.toInteger()
+    }
 }

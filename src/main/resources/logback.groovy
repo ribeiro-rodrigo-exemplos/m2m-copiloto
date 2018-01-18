@@ -1,6 +1,7 @@
 import ch.qos.logback.classic.AsyncAppender
 import ch.qos.logback.core.util.FileSize
 import org.springframework.core.io.ClassPathResource
+import org.springframework.core.io.FileSystemResource
 import org.yaml.snakeyaml.Yaml
 
 def static getAppProperties(){
@@ -11,7 +12,7 @@ def static getAppProperties(){
     if(appFile.exists())
         appProperties = parser.load(new FileInputStream(appFile))
     else
-        appProperties = parser.load(new ClassPathResource(appFile.name).inputStream)
+        appProperties = parser.load(new FileSystemResource(System.getProperty('spring.config.location')).inputStream)
 
     appProperties
 }

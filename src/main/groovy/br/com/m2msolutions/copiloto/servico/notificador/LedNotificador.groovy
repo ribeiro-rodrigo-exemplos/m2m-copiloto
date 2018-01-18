@@ -25,7 +25,7 @@ class LedNotificador {
                 evento.veiculo?.veiculoId,
                 evento.veiculo?.modulo?.modelo,
                 evento.veiculo?.modulo?.identificador,
-                evento.regulagem.getTempoRegulado()
+                evento.regulagem.tempoReguladoEmMinutos
         )
     }
 
