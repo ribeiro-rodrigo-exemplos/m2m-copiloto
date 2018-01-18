@@ -5,21 +5,21 @@ import org.springframework.core.io.FileSystemResource
 import org.yaml.snakeyaml.Yaml
 
 def static getAppProperties(){
-    def appFile = 'application.yml' as File
     def appProperties
     def parser = new Yaml()
+    def appConfigLocation = System.getProperty('spring.config.location')
 
-    if(appFile.exists())
-        appProperties = parser.load(new FileInputStream(appFile))
+    if(!appConfigLocation)
+        appProperties = parser.load(new ClassPathResource('application.yml').inputStream)
     else
-        appProperties = parser.load(new FileSystemResource(System.getProperty('spring.config.location')).inputStream)
+        appProperties = parser.load(new FileSystemResource(appConfigLocation).inputStream)
 
     appProperties
 }
 
 def appProperties = getAppProperties()
 
-def LOG_PATH = appProperties['logging']['path']
+def  LOG_PATH = appProperties['logging']['path']
 def LOG_ARCHIVE = "${LOG_PATH}/arquivados"
 def LOG_FILE_NAME = 'copiloto'
 def LOG_FILE_SIZE = appProperties['logging']['fileSize'] as String
