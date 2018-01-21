@@ -2,8 +2,7 @@ package br.com.m2msolutions.copiloto.modelo.viagem.momento
 
 import br.com.m2msolutions.copiloto.modelo.Veiculo
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
-import br.com.m2msolutions.copiloto.servico.TrajetoService
-import br.com.m2msolutions.copiloto.servico.ViagemService
+import br.com.m2msolutions.copiloto.modelo.viagem.ControladorDeViagem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
@@ -11,58 +10,55 @@ import org.springframework.stereotype.Component
 class MomentoViagemBuilder {
 
     @Autowired
-    ViagemService viagemService
-    @Autowired
-    TrajetoService trajetoService
+    ControladorDeViagem controladorDeViagem
 
     Builder criarMomento(){
         new Builder()
     }
 
     private class Builder{
-        def situacaoViagem = new MomentoViagem(
+        def momentoViagem = new MomentoViagem(
                 veiculo: new Veiculo(modulo: new Modulo()),
-                viagemService:viagemService,
-                trajetoService: trajetoService
+                controladorDeViagem: controladorDeViagem
         )
 
         Builder doCliente(Integer clienteId){
-            situacaoViagem.veiculo.clienteId = clienteId
+            momentoViagem.veiculo.clienteId = clienteId
             this
         }
 
         Builder naLinha(String linhaId){
-            situacaoViagem.linhaId = linhaId
+            momentoViagem.linhaId = linhaId
             this
         }
 
         Builder noTrajeto(String trajetoId){
-            situacaoViagem.trajetoId = trajetoId
+            momentoViagem.trajetoId = trajetoId
             this
         }
 
         Builder comVeiculo(Integer veiculoId){
-            situacaoViagem.veiculo.veiculoId = veiculoId
+            momentoViagem.veiculo.veiculoId = veiculoId
             this
         }
 
         Builder comModulo(Modulo modulo){
-            situacaoViagem.veiculo.modulo = modulo
+            momentoViagem.veiculo.modulo = modulo
             this
         }
 
         Builder transmitiuEm(Date momentoTransmissao){
-            situacaoViagem.momentoDaTransmissao = momentoTransmissao
+            momentoViagem.momentoDaTransmissao = momentoTransmissao
             this
         }
 
         Builder comPercentualDeConclusao(Float percentual){
-            situacaoViagem.percentualDeConclusao = percentual
+            momentoViagem.percentualDeConclusao = percentual
             this
         }
 
         MomentoViagem criar(){
-            situacaoViagem
+            momentoViagem
         }
 
     }

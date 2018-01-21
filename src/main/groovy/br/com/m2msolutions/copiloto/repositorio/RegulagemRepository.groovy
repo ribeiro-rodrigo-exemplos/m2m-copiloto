@@ -21,6 +21,10 @@ class RegulagemRepository {
         mapa.put evento.veiculo.veiculoId,evento
     }
 
+    void remover(Integer veiculoId){
+        mapa.remove veiculoId
+    }
+
     RegulagemEvent obterUltimaRegulagemDoVeiculo(Integer veiculoId){
         mapa.get veiculoId
     }

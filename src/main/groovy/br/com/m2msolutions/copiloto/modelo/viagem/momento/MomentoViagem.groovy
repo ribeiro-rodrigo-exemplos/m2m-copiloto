@@ -3,9 +3,8 @@ package br.com.m2msolutions.copiloto.modelo.viagem.momento
 import br.com.m2msolutions.copiloto.modelo.Trajeto
 import br.com.m2msolutions.copiloto.modelo.Veiculo
 import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
+import br.com.m2msolutions.copiloto.modelo.viagem.ControladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
-import br.com.m2msolutions.copiloto.servico.TrajetoService
-import br.com.m2msolutions.copiloto.servico.ViagemService
 import groovy.transform.PackageScope
 
 class MomentoViagem {
@@ -14,11 +13,11 @@ class MomentoViagem {
     BigDecimal percentualDeConclusao
     Veiculo veiculo
 
-    private Viagem viagem
     private String linhaId
     private String trajetoId
-    private ViagemService viagemService
-    private TrajetoService trajetoService
+    private Viagem viagem
+    private Trajeto trajeto
+    private ControladorDeViagem controladorDeViagem
 
     @PackageScope
     void setTrajetoId(String trajetoId){
@@ -30,29 +29,32 @@ class MomentoViagem {
         this.linhaId = linhaId
     }
 
-    @PackageScope
-    void setViagemService(ViagemService viagemService){
-        this.viagemService = viagemService
-    }
-
-    @PackageScope
-    void setTrajetoService(TrajetoService trajetoService){
-        this.trajetoService = trajetoService
-    }
-
     Alocacao getAlocacao(){
-        getViagem()?.alocacao
+        controladorDeViagem.obterAlocacao this
     }
 
     Viagem getViagem(){
-        if(!viagem)
-            viagem = viagemService.obterViagemDoVeiculo veiculo.veiculoId
+        if(viagem)
+            return viagem
 
+        viagem = controladorDeViagem.obterViagem this
         viagem
     }
 
     Trajeto getTrajeto(){
-        trajetoService.obterTrajeto linhaId, trajetoId
+        if(trajeto)
+            return trajeto
+
+        trajeto = controladorDeViagem.obterTrajeto this
+        trajeto
+    }
+
+    String getTrajetoId(){
+        trajetoId
+    }
+
+    String getLinhaId(){
+        linhaId
     }
 }
 
