@@ -8,6 +8,7 @@ import br.com.m2msolutions.copiloto.modelo.Veiculo
 import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemEvent
 import br.com.m2msolutions.copiloto.modelo.regulacao.Regulagem
 import br.com.m2msolutions.copiloto.modelo.regulacao.TipoRegulacao
+import br.com.m2msolutions.copiloto.repositorio.RegulagemRepository
 import br.com.m2msolutions.copiloto.servico.notificador.WebNotificador
 import groovy.time.TimeCategory
 import groovy.time.TimeDuration
@@ -24,6 +25,8 @@ class DistanciaMinimaAdapterService extends NotificacaoGrpc.NotificacaoImplBase 
     WebNotificador webNotificador
     @Autowired
     DateHelper dateHelper
+    @Autowired
+    RegulagemRepository regulagemRepository
 
     private final Logger logger = LoggerFactory.getLogger(getClass())
 
@@ -46,7 +49,8 @@ class DistanciaMinimaAdapterService extends NotificacaoGrpc.NotificacaoImplBase 
 
         RegulagemEvent evento = new RegulagemEvent(regulagem: regulagem,veiculo: veiculo)
 
-        webNotificador.enviarRegulagem(evento)
+        webNotificador.enviarRegulagem evento
+        regulagemRepository.salvar evento
 
         def response = NotificacaoResponse
                                     .newBuilder()
