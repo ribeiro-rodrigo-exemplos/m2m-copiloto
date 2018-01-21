@@ -1,5 +1,7 @@
 package br.com.m2msolutions.copiloto.modelo.regulacao
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+
 class Regulagem implements Serializable {
 
     private TipoRegulacao tipoRegulacao
@@ -13,6 +15,7 @@ class Regulagem implements Serializable {
         tempoRegulado
     }
 
+    @JsonIgnore
     Integer getTempoReguladoEmMinutos(){
         tempoRegulado?.toInteger()
     }

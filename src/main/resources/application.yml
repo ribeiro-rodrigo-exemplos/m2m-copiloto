@@ -11,7 +11,7 @@ spring:
   data:
     mongodb:
       database: frota_znh
-      host: mongo-hml
+      host: localhost
 
 grpc:
   port: 6565
