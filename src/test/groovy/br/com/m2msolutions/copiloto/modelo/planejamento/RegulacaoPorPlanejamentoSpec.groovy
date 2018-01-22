@@ -5,9 +5,9 @@ import br.com.m2msolutions.copiloto.builder.TransmissaoBuilder
 import br.com.m2msolutions.copiloto.helpers.NumberHelper
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemException
+import br.com.m2msolutions.copiloto.modelo.viagem.ControladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
-import br.com.m2msolutions.copiloto.servico.ViagemService
 import br.com.m2msolutions.copiloto.helpers.DateHelper
 import groovy.time.TimeDuration
 import spock.lang.Specification
@@ -17,7 +17,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
     MomentoViagemBuilder momentoBuilder
     ViagemBuilder viagemBuilder
     TransmissaoBuilder transmissaoBuilder
-    ViagemService viagemService
+    ControladorDeViagem controladorDeViagem
 
     RegulacaoPorPlanejamento regulacao
     DateHelper dateUtil
@@ -26,8 +26,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         viagemBuilder = new ViagemBuilder()
 
-        viagemService = Mock ViagemService
-        momentoBuilder = new MomentoViagemBuilder(viagemService: viagemService)
+        controladorDeViagem = Mock ControladorDeViagem
+        momentoBuilder = new MomentoViagemBuilder(controladorDeViagem: controladorDeViagem)
         transmissaoBuilder = new TransmissaoBuilder()
 
         dateUtil = new DateHelper(numberHelper: new NumberHelper())
@@ -71,7 +71,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             6.45 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -110,7 +111,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             -8.14 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -149,7 +151,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             0.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -188,7 +191,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             1.0 == emMinutosESegundos(tempoRegulado)
     }
 
@@ -227,7 +231,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             -1.0 == emMinutosESegundos(tempoRegulado)
 
     }
@@ -265,7 +270,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * viagemService.obterViagemDoVeiculo(1212) >> viagem
+            (1.._) * controladorDeViagem.obterAlocacao(momento) >> null
             thrown(RegulagemException)
     }
 

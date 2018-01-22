@@ -3,28 +3,24 @@ package br.com.m2msolutions.copiloto.modelo.viagem.momento
 import br.com.m2msolutions.copiloto.modelo.Trajeto
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.viagem.Alocacao
+import br.com.m2msolutions.copiloto.modelo.viagem.ControladorDeViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
-import br.com.m2msolutions.copiloto.servico.TrajetoService
-import br.com.m2msolutions.copiloto.servico.ViagemService
 import spock.lang.Specification
 
 class MomentoViagemBuilderSpec extends Specification {
 
     MomentoViagemBuilder builder
-    ViagemService viagemService
-    TrajetoService trajetoService
+    ControladorDeViagem controladorDeViagem
 
     void setup(){
 
-        viagemService = Mock(ViagemService){
-            obterViagemDoVeiculo(_) >> new Viagem(alocacao: new Alocacao())
+        controladorDeViagem = Mock(ControladorDeViagem){
+            obterViagem(_) >> new Viagem(alocacao: new Alocacao())
+            obterAlocacao(_) >> new Alocacao()
+            obterTrajeto(_) >> new Trajeto()
         }
 
-        trajetoService = Mock(TrajetoService){
-            obterTrajeto(*_) >> new Trajeto()
-        }
-
-        builder = new MomentoViagemBuilder(viagemService: viagemService,trajetoService: trajetoService)
+        builder = new MomentoViagemBuilder(controladorDeViagem: controladorDeViagem)
     }
 
     def 'Deve criar momento da viagem' () {
