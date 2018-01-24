@@ -6,6 +6,7 @@ import br.com.m2msolutions.copiloto.helpers.NumberHelper
 import br.com.m2msolutions.copiloto.modelo.dispositivo.Modulo
 import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemException
 import br.com.m2msolutions.copiloto.modelo.viagem.ControladorDeViagem
+import br.com.m2msolutions.copiloto.modelo.viagem.Viagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagemBuilder
 import br.com.m2msolutions.copiloto.helpers.DateHelper
@@ -71,7 +72,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             6.45 == emMinutosESegundos(tempoRegulado)
     }
@@ -111,7 +111,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             -8.14 == emMinutosESegundos(tempoRegulado)
     }
@@ -151,7 +150,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             0.0 == emMinutosESegundos(tempoRegulado)
     }
@@ -191,7 +189,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             1.0 == emMinutosESegundos(tempoRegulado)
     }
@@ -231,7 +228,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> viagem.alocacao
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             -1.0 == emMinutosESegundos(tempoRegulado)
 
@@ -270,7 +266,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         then:
 
-            (1.._) * controladorDeViagem.obterAlocacao(momento) >> null
+            (1.._) * controladorDeViagem.obterViagem(momento) >> new Viagem()
             thrown(RegulagemException)
     }
 

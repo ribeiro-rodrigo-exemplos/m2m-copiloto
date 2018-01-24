@@ -32,10 +32,6 @@ class ControladorDeViagem {
         trajetoService.obterTrajeto momentoViagem.linhaId, momentoViagem.trajetoId
     }
 
-    Alocacao obterAlocacao(MomentoViagem momentoViagem){
-        obterViagem(momentoViagem)?.alocacao
-    }
-
     private Boolean naoEhContinuacaoDoMomentoAnterior(MomentoViagem momentoViagem){
         def ultimaRegulagem = regulagemRepository.obterUltimaRegulagemDoVeiculo momentoViagem?.veiculo?.veiculoId
         ultimaRegulagem?.percentualDeConclusao > momentoViagem?.percentualDeConclusao
