@@ -30,7 +30,7 @@ class MomentoViagem {
     }
 
     Alocacao getAlocacao(){
-        controladorDeViagem.obterAlocacao this
+        getViagem()?.alocacao
     }
 
     Viagem getViagem(){

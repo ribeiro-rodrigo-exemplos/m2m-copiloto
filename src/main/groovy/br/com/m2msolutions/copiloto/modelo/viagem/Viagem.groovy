@@ -14,5 +14,7 @@ class Viagem implements Serializable {
     Date momentoDaAbertura
     @Field('planejada')
     Alocacao alocacao
+    @Field('estadoAtual')
+    Integer estado
 
 }
