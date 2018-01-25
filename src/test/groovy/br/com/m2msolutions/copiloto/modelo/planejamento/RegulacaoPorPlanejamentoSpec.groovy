@@ -33,7 +33,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
         dateUtil = new DateHelper(numberHelper: new NumberHelper())
 
-        regulacao = new RegulacaoPorPlanejamento(dateUtil: dateUtil)
+        regulacao = new RegulacaoPorPlanejamento(dateUtil: dateUtil,minutosDeTolerancia: 3)
 
     }
 
@@ -230,7 +230,6 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
             -1.0 == emMinutosESegundos(tempoRegulado)
-
     }
 
     def "Não deve realizar regulagem sem alocação de viagem" (){
@@ -244,8 +243,8 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         and: 'Criando momento exato da transmissão'
 
             def momentoDaTransmissao = transmissaoBuilder
-                    .emViagem(viagem)
-                    .transmitiuAposTempoDeViagem(25)
+                                            .emViagem(viagem)
+                                            .transmitiuAposTempoDeViagem(25)
 
         and: 'Criando um instante da viagem'
 
@@ -268,6 +267,162 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
 
             (1.._) * controladorDeViagem.obterViagem(momento) >> new Viagem()
             thrown(RegulagemException)
+    }
+
+    def 'Deve retornar regulagem zero se tempo de viagem for menor que a tolerancia de regulagem' () {
+
+        given: 'Criando alocação da viagem'
+
+            def viagem = viagemBuilder
+                                .planejadaPara(new Date())
+                                .comMinutosDeDuracao(55)
+                                .iniciouComMinutosDeAtraso(5)
+                                .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                                        .emViagem(viagem)
+                                        .transmitiuAposTempoDeViagem(2)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                        .criarMomento()
+                                        .naLinha('Linha12')
+                                        .doCliente(209)
+                                        .noTrajeto('TRAJETO12')
+                                        .comPercentualDeConclusao(5)
+                                        .comVeiculo(1212)
+                                        .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                        .transmitiuEm(momentoDaTransmissao)
+                                        .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            def tempoRegulado = regulacao.regular momento
+
+        then:
+
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
+            emMinutosESegundos(tempoRegulado) == 0.0
+    }
+
+    def 'Deve retornar regulagem zero se tempo de viagem for igual a tolerancia de regulagem' () {
+
+        given: 'Criando alocação da viagem'
+
+            def viagem = viagemBuilder
+                                .planejadaPara(new Date())
+                                .comMinutosDeDuracao(55)
+                                .iniciouComMinutosDeAtraso(5)
+                                .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                                                .emViagem(viagem)
+                                                .transmitiuAposTempoDeViagem(3)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                            .criarMomento()
+                                            .naLinha('Linha12')
+                                            .doCliente(209)
+                                            .noTrajeto('TRAJETO12')
+                                            .comPercentualDeConclusao(5)
+                                            .comVeiculo(1212)
+                                            .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                            .transmitiuEm(momentoDaTransmissao)
+                                            .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            def tempoRegulado = regulacao.regular momento
+
+        then:
+
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
+            emMinutosESegundos(tempoRegulado) == 0.0
+    }
+
+    def 'Deve retornar regulagem zero se a viagem tiver terminado com percentual de conclusao igual a 100' () {
+
+        given: 'Criando alocação da viagem'
+
+            def viagem = viagemBuilder
+                                .planejadaPara(new Date())
+                                .comMinutosDeDuracao(55)
+                                .iniciouComMinutosDeAtraso(5)
+                                .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                                            .emViagem(viagem)
+                                            .transmitiuAposTempoDeViagem(56)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                        .criarMomento()
+                                        .naLinha('Linha12')
+                                        .doCliente(209)
+                                        .noTrajeto('TRAJETO12')
+                                        .comPercentualDeConclusao(100)
+                                        .comVeiculo(1212)
+                                        .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                        .transmitiuEm(momentoDaTransmissao)
+                                        .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            def tempoRegulado = regulacao.regular momento
+
+        then:
+
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
+            emMinutosESegundos(tempoRegulado) == 0.0
+    }
+
+    def 'Deve retornar regulagem zero se a viagem tiver terminado com percentual de conclusao superior a 100' () {
+
+        given: 'Criando alocação da viagem'
+
+            def viagem = viagemBuilder
+                            .planejadaPara(new Date())
+                            .comMinutosDeDuracao(120)
+                            .iniciouComMinutosDeAtraso(5)
+                            .criar()
+
+        and: 'Criando momento exato da transmissão'
+
+            def momentoDaTransmissao = transmissaoBuilder
+                                            .emViagem(viagem)
+                                            .transmitiuAposTempoDeViagem(120)
+
+        and: 'Criando um instante da viagem'
+
+            MomentoViagem momento = momentoBuilder
+                                        .criarMomento()
+                                        .naLinha('Linha12')
+                                        .doCliente(209)
+                                        .noTrajeto('TRAJETO12')
+                                        .comPercentualDeConclusao(105)
+                                        .comVeiculo(1212)
+                                        .comModulo(new Modulo(modelo:'MAXTRACK',identificador:'0101'))
+                                        .transmitiuEm(momentoDaTransmissao)
+                                        .criar()
+
+        when: 'Realizando regulagem com o algoritmo de planejamento'
+
+            def tempoRegulado = regulacao.regular momento
+
+        then:
+
+            (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
+            emMinutosESegundos(tempoRegulado) == 0.0
     }
 
     private Double emMinutosESegundos(TimeDuration duration){

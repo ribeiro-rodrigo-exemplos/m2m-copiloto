@@ -25,6 +25,12 @@ hazelcast:
   cache-instances:
     - localhost:5701
 
-redis:
-  host: localhost
-  porta: 6379
+copiloto-led:
+  minutos-de-iluminacao: 9
+  redis:
+    host: localhost
+    porta: 6379
+
+planejamento:
+  minutos-de-tolerancia: 3
+

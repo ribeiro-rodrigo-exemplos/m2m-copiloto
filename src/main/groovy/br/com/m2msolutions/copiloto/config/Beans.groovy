@@ -13,7 +13,7 @@ import java.util.concurrent.Executors
 class Beans{
 
     @Bean
-    @ConfigurationProperties('redis')
+    @ConfigurationProperties('copiloto-led.redis')
     CopilotoLed copilotoLed(){
         new CopilotoLed()
     }
