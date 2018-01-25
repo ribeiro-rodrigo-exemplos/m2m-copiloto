@@ -23,13 +23,16 @@ class LedNotificador {
     @Subscribe
     void enviarRegulagem(RegulagemEvent evento){
 
-        copilotoLed.enviarComando(
-                evento.veiculo?.clienteId,
-                evento.veiculo?.veiculoId,
-                evento.veiculo?.modulo?.modelo,
-                evento.veiculo?.modulo?.identificador,
-                evento.regulagem.tempoReguladoEmMinutos
+        def request = copilotoLed.criarRequisicao(
+            evento.veiculo?.clienteId,
+            evento.veiculo?.veiculoId,
+            evento.veiculo?.modulo?.modelo,
+            evento.veiculo?.modulo?.identificador,
+            evento.regulagem.tempoReguladoEmMinutos,
+            minutosDeIluminacao
         )
+
+        copilotoLed.enviarComando request
     }
 
     @PostConstruct
