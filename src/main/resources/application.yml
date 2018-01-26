@@ -26,11 +26,11 @@ hazelcast:
     - localhost:5701
 
 copiloto-led:
-  minutos-de-iluminacao: 9
+  minutos-de-iluminacao: 2
   redis:
     host: localhost
     porta: 6379
 
 planejamento:
-  minutos-de-tolerancia: 3
+  minutos-de-tolerancia: 1
 

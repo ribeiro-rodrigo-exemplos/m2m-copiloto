@@ -60,7 +60,7 @@ class RegulacaoPorPlanejamento implements Regulacao {
 
     private Boolean noInicioDaViagem(MomentoViagem momento){
         def tempoGasto = calcularTempoGastoNoTrajeto momento.viagem.momentoDaAbertura, momento.momentoDaTransmissao
-        tempoGasto.minutes <= minutosDeTolerancia
+        tempoGasto.minutes < minutosDeTolerancia
     }
 
     private TimeDuration calcularDuracaoEstimadaDoTrajeto(Date dataHoraPartida, Date dataHoraChegadaPlanejada){

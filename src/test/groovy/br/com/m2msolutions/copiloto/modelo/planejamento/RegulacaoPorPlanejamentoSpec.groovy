@@ -308,7 +308,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
             emMinutosESegundos(tempoRegulado) == 0.0
     }
 
-    def 'Deve retornar regulagem zero se tempo de viagem for igual a tolerancia de regulagem' () {
+    def 'Não deve retornar regulagem zero se tempo de viagem for igual a tolerancia de regulagem' () {
 
         given: 'Criando alocação da viagem'
 
@@ -344,7 +344,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         then:
 
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
-            emMinutosESegundos(tempoRegulado) == 0.0
+            emMinutosESegundos(tempoRegulado) != 0.0
     }
 
     def 'Deve retornar regulagem zero se a viagem tiver terminado com percentual de conclusao igual a 100' () {
