@@ -5,6 +5,8 @@ import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemEvent
 import br.com.m2msolutions.copiloto.repositorio.StatusRepository
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
@@ -24,27 +26,39 @@ class LedNotificador {
     @Value('${copiloto-led.minutos-de-iluminacao}')
     private Integer minutosDeIluminacao
 
+    private final Logger logger = LoggerFactory.getLogger(getClass())
+
     @Subscribe
     void enviarRegulagem(RegulagemEvent evento){
 
-        if(naoDeveEnviarComando(evento))
-            return
+        try{
 
-        copilotoLed.enviarComando(
-            evento.veiculo?.clienteId,
-            evento.veiculo?.veiculoId,
-            evento.veiculo?.modulo?.modelo,
-            evento.veiculo?.modulo?.identificador,
-            evento.regulagem.tempoReguladoEmMinutos,
-            minutosDeIluminacao
-        )
+            if(naoDeveEnviarComando(evento))
+                return
 
-        statusRepository.salvarCodigoDeStatusDoVeiculo(
-            evento.veiculo.veiculoId,
-            obterCodigoDeStatus(evento),
-            minutosDeIluminacao.minus(1).longValue(),
-            TimeUnit.MINUTES
-        )
+            logger.info "Enviando comando ao veiculo ${evento.veiculo.veiculoId}"
+
+            copilotoLed.enviarComando(
+                    evento.veiculo?.clienteId,
+                    evento.veiculo?.veiculoId,
+                    evento.veiculo?.modulo?.modelo,
+                    evento.veiculo?.modulo?.identificador,
+                    evento.regulagem.tempoReguladoEmMinutos,
+                    minutosDeIluminacao
+            )
+
+            statusRepository.salvarCodigoDeStatusDoVeiculo(
+                    evento.veiculo.veiculoId,
+                    obterCodigoDeStatus(evento),
+                    minutosDeIluminacao.minus(1).longValue(),
+                    TimeUnit.MINUTES
+            )
+
+        }
+        catch (e){
+            logger.error "Erro ao enviar comando ao veiculo ${evento.veiculo.veiculoId}"
+        }
+
     }
 
     private Boolean naoDeveEnviarComando(RegulagemEvent evento){
