@@ -25,7 +25,7 @@ class ViagemService {
     @CacheEvict(key="#veiculoId")
     void removerViagemDoVeiculo(Integer veiculoId){}
 
-    @Cacheable(unless = '#result.getEstado()<3')
+    @Cacheable(unless = '#result==null || #result.getEstado()<3')
     Viagem obterViagemDoVeiculo(Integer veiculoId){
 
         def viagem = viagemRepository.findByIdVeiculo veiculoId
