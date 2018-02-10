@@ -18,7 +18,7 @@ class RegulacaoPorPlanejamento implements Regulacao {
     private DateHelper dateUtil
     @Value('${planejamento.minutos-de-tolerancia}')
     private Integer minutosDeTolerancia
-    private final static BigDecimal PERCENTUAL_DE_CONCLUSAO_DE_VIAGEM = 100.0
+    private final static BigDecimal PERCENTUAL_DE_CONCLUSAO_DE_VIAGEM = 97.0
 
     @Override
     TimeDuration regular(MomentoViagem momentoViagem) {
