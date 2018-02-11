@@ -1,9 +1,9 @@
 package br.com.m2msolutions.copiloto.infra.websocket
 
-import com.google.common.eventbus.EventBus
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 import org.springframework.web.socket.CloseStatus
 import org.springframework.web.socket.TextMessage
@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 class WebSocket implements WebSocketHandler {
 
     @Autowired
-    EventBus eventBus
+    ApplicationEventPublisher publisher
 
     private final sessionsMap = [:]
 
@@ -51,7 +51,7 @@ class WebSocket implements WebSocketHandler {
 
         if(idVeiculo){
             adicionarSessao(idVeiculo,session)
-            eventBus.post(new NovaSessaoWebSocketEvent(veiculoId: idVeiculo,sessaoId: session.id))
+            publisher.publishEvent(new NovaSessaoWebSocketEvent(veiculoId: idVeiculo,sessaoId: session.id))
         }
         else
             session.close(CloseStatus.NORMAL)

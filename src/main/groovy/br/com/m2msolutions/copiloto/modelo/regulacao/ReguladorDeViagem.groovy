@@ -3,9 +3,9 @@ package br.com.m2msolutions.copiloto.modelo.regulacao
 import br.com.m2msolutions.copiloto.modelo.viagem.momento.MomentoViagem
 import br.com.m2msolutions.copiloto.helpers.DateHelper
 import br.com.m2msolutions.copiloto.repositorio.RegulagemRepository
-import com.google.common.eventbus.EventBus
 import groovy.time.TimeDuration
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 
 @Component
@@ -14,7 +14,7 @@ class ReguladorDeViagem {
     @Autowired
     DateHelper dateHelper
     @Autowired
-    EventBus eventBus
+    ApplicationEventPublisher publisher
     @Autowired
     RegulagemRepository regulagemRepository
 
@@ -36,7 +36,7 @@ class ReguladorDeViagem {
 
         regulagemRepository.salvar regulagemEvent
 
-        eventBus.post regulagemEvent
+        publisher.publishEvent regulagemEvent
 
         regulagem
     }
