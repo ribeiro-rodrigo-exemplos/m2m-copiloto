@@ -34,9 +34,9 @@ class ReguladorDeViagem {
             percentualDeConclusao: momentoViagem.percentualDeConclusao
         )
 
-        eventBus.post regulagemEvent
-
         regulagemRepository.salvar regulagemEvent
+
+        eventBus.post regulagemEvent
 
         regulagem
     }
