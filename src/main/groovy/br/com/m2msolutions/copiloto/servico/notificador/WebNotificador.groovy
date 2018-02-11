@@ -7,6 +7,8 @@ import br.com.m2msolutions.copiloto.modelo.regulacao.RegulagemEvent
 import br.com.m2msolutions.copiloto.repositorio.RegulagemRepository
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import javax.annotation.PostConstruct
@@ -23,8 +25,12 @@ class WebNotificador{
     @Autowired
     RegulagemRepository regulagemRepository
 
+    private final Logger logger = LoggerFactory.getLogger(getClass())
+
     @Subscribe
     void enviarRegulagem(RegulagemEvent evento){
+
+        logger.info "Enviando regulagem para a sessao do veiculo ${evento.veiculo.veiculoId}"
 
         def objetoSerializado = jsonHelper.serializar evento
         webSocket.enviarMensagem evento?.veiculo?.veiculoId, objetoSerializado
