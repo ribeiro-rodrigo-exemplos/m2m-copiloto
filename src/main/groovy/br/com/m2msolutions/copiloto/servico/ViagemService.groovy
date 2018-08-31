@@ -28,7 +28,7 @@ class ViagemService {
     @Cacheable(unless = '#result==null || #result.getEstado()<3 || #result.getAlocacao()==null')
     Viagem obterViagemDoVeiculo(Integer veiculoId){
 
-        def viagem = viagemRepository.findByIdVeiculo veiculoId
+        def viagem = viagemRepository.findByTipoAndIdVeiculoOrderByIdViagemDesc 0, veiculoId
 
         if(!viagem){
             logger.warn "Viagem do veiculo ${veiculoId} nao foi encontrada."

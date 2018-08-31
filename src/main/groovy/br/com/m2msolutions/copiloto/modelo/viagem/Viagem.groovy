@@ -16,5 +16,7 @@ class Viagem implements Serializable {
     Alocacao alocacao
     @Field('estadoAtual')
     Integer estado
+    @Field("tipo")
+    Integer tipo
 
 }

@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
 
 interface ViagemRepository extends MongoRepository<Viagem,String> {
     Viagem findByIdViagem(String idViagem)
-    Viagem findByIdVeiculo(Integer idVeiculo)
+    Viagem findByTipoAndIdVeiculoOrderByIdViagemDesc(Integer tipo,Integer idVeiculo)
 }
