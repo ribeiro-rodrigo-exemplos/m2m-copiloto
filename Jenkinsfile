@@ -3,12 +3,13 @@ pipeline{
     stages{
         stage('Build'){
             steps{
+		deleteDir()
                 sh './gradlew build'
             }
         }
         stage('Test'){
             steps{
-                sh 'rm build/test-results/**/*.xml'
+               //sh 'rm build/test-results/**/*.xml'
                 sh './gradlew check'
             }
         }
