@@ -3,7 +3,6 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-		deleteDir()
                 sh './gradlew build'
             }
         }
@@ -18,6 +17,7 @@ pipeline{
         always{
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
             junit 'build/test-results/**/*.xml'
+	    deleteDir() 	
         }
     }
 }
