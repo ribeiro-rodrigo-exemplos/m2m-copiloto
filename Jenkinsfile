@@ -8,13 +8,14 @@ pipeline{
         }
         stage('Test'){
             steps{
+                sh 'rm build/test-results/**/*.xml'
                 sh './gradlew check'
             }
         }
     }
     post{
         always{
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
+            //archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
             junit 'build/test-results/**/*.xml'
         }
     }
