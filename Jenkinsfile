@@ -1,6 +1,7 @@
 pipeline{
     agent any
     parameters{
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
         string(name: 'Version', defaultValue:'1.0.0', description: 'Versão do aplicativo')
     }
     environment{
@@ -46,6 +47,7 @@ pipeline{
                 echo "username ${TOMCAT_AUTH_USR}"
                 echo "password ${TOMCAT_AUTH_PSW}"
                 echo "${params.Version}" 
+                echo "${params.BRANCH}"
 
                 withCredentials(bindings:[sshUserPrivateKey(
                     credentialsId:'ssh_key', 
