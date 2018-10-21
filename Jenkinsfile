@@ -4,6 +4,7 @@ pipeline{
         CONFIG_LOCATION="/opt/copiloto/copiloto.yml" 
         CC = """${sh(returnStdout: true, script:'echo "clang"').trim()}"""
         EXIT_STATUS="""${sh(returnStatus:true,script:'exit 1')}"""
+        SECRET_FILE = credentials('secret_file_test') 
     } 
     stages{
         stage('Build'){
@@ -36,6 +37,7 @@ pipeline{
                 echo "${env.CC}"
                 echo "${env.EXIT_STATUS}"
                 echo "java -jar copiloto.jar --spring-config-location=${env.CONFIG_LOCATION}" 
+                echo "secret file - ${SECRET_FILE}"
             }
         }
     }
