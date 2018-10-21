@@ -4,7 +4,7 @@ pipeline{
         preserveStashes(buildCount:4) 
     }
     parameters{
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'release/candidate-1.1.1', name: 'BRANCH', type: 'PT_BRANCH', quickFilterEnabled: true 
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'release/candidate-1.1.1', name: 'BRANCH', type: 'PT_BRANCH' 
         string(name: 'Version', defaultValue:'1.0.0', description: 'Versão do aplicativo')
     }
     environment{
@@ -25,7 +25,7 @@ pipeline{
         }
         stage('Test'){
             steps{
-               //sh 'rm build/test-results/**/*.xml'
+                sh 'rm build/test-results/**/*.xml || true'
                 sh './gradlew check || true'
                 junit 'build/test-results/**/*.xml'
             }
@@ -70,7 +70,7 @@ pipeline{
         always{
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
             //junit 'build/test-results/**/*.xml'
-	        deleteDir() 	
+	        //deleteDir() 	
         }
     }
 }
