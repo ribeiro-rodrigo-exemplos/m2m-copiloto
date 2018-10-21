@@ -4,7 +4,7 @@ pipeline{
         preserveStashes(buildCount:4) 
     }
     parameters{
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'release/candidate-1.1.1', name: 'BRANCH', type: 'PT_BRANCH'
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'release/candidate-1.1.1', name: 'BRANCH', type: 'PT_BRANCH', quickFilterEnabled: true 
         string(name: 'Version', defaultValue:'1.0.0', description: 'Versão do aplicativo')
     }
     environment{
