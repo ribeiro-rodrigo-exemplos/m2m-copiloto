@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    options{
+        preserveStashes(buildCount:4) 
+    }
     parameters{
         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'release/candidate-1.1.1', name: 'BRANCH', type: 'PT_BRANCH'
         string(name: 'Version', defaultValue:'1.0.0', description: 'Versão do aplicativo')
@@ -17,6 +20,7 @@ pipeline{
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 //sh './gradlew build'
                 sh './gradlew build -x test'
+                stash includes: '**/build/**/*.jar', name: 'copiloto'
             }
         }
         stage('Test'){
@@ -57,6 +61,7 @@ pipeline{
                 )]){
 
                     sh 'ssh -i $SSH_KEY_FILE $SSH_USERNAME@198.211.108.140 ifconfig'
+                    unstash 'copiloto'
                 }
             }
         }
