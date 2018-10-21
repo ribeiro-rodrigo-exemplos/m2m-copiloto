@@ -30,6 +30,7 @@ pipeline{
             steps{
                 echo "Realizando build..."
                 echo "${env.LOCAL_ENVIRONMENT}"
+                echo "local do java ${env.JAVA_HOME}"
                 echo "java -jar copiloto.jar --spring-config-location=${env.CONFIG_LOCATION}" 
             }
         }
