@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    parameters{
+        string(name: 'Version', defaultValue:'1.0.0', description: 'Versão do aplicativo')
+    }
     environment{
         CONFIG_LOCATION="/opt/copiloto/copiloto.yml" 
         CC = """${sh(returnStdout: true, script:'echo "clang"').trim()}"""
@@ -42,6 +45,7 @@ pipeline{
                 echo "username and password ${TOMCAT_AUTH}"
                 echo "username ${TOMCAT_AUTH_USR}"
                 echo "password ${TOMCAT_AUTH_PSW}"
+                echo "${params.Version}" 
 
                 withCredentials(bindings:[sshUserPrivateKey(
                     credentialsId:'ssh_key', 
