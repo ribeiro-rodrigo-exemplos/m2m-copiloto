@@ -42,6 +42,16 @@ pipeline{
                 echo "username and password ${TOMCAT_AUTH}"
                 echo "username ${TOMCAT_AUTH_USR}"
                 echo "password ${TOMCAT_AUTH_PSW}"
+
+                withCredentials(bindings:[sshUserPrivatekey(
+                    credentialsId:'', 
+                    keyFileVariable: 'SSH_KEY_FILE',
+                    passphraseVariable: 'SSH_KEY', 
+                    usernameVariable : 'SSH_USERNAME' 
+                )]){
+
+                    sh "printenv"
+                }
             }
         }
     }
