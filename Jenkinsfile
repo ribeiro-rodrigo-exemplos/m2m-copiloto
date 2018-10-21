@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         CONFIG_LOCATION="/opt/copiloto/copiloto.yml" 
-        CC = """${sh(returnStdout: true, script:'echo "clang"')}"""
+        CC = """${sh(returnStdout: true, script:'echo "clang"').trim()}"""
         EXIT_STATUS="""${sh(returnStatus:true,script:'exit 1')}"""
     } 
     stages{
