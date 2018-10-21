@@ -1,5 +1,8 @@
 pipeline{
-    agent any 
+    agent any
+    environment{
+        CONFIG_LOCATION="/opt/copiloto/copiloto.yml" 
+    } 
     stages{
         stage('Build'){
             steps{
@@ -21,8 +24,13 @@ pipeline{
                     currentBuild.result == null || currentBuild.result == 'SUCCESS' 
                 }
             }
+            environment{
+                LOCAL_ENVIRONMENT="local env"
+            }
             steps{
-                echo "Realizando build" 
+                echo "Realizando build..."
+                echo "${env.LOCAL_ENVIRONMENT}"
+                echo "java -jar copiloto.jar --spring-config-location=${env.CONFIG_LOCATION}" 
             }
         }
     }
