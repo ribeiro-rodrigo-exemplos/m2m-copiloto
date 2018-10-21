@@ -10,7 +10,8 @@ pipeline{
         stage('Test'){
             steps{
                //sh 'rm build/test-results/**/*.xml'
-                sh './gradlew check'
+                sh './gradlew check || true'
+                junit 'build/test-results/**/*.xml'
             }
         }
         stage('Deploy'){
@@ -27,7 +28,7 @@ pipeline{
     post{
         always{
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
-            junit 'build/test-results/**/*.xml'
+            //junit 'build/test-results/**/*.xml'
 	        deleteDir() 	
         }
     }
