@@ -5,6 +5,7 @@ pipeline{
         CC = """${sh(returnStdout: true, script:'echo "clang"').trim()}"""
         EXIT_STATUS="""${sh(returnStatus:true,script:'exit 1')}"""
         SECRET_FILE = credentials('secret_file_test') 
+        TOMCAT_AUTH = credentials('894b4f90-e63e-408a-a91a-2d1d41ed532b')
     } 
     stages{
         stage('Build'){
@@ -38,6 +39,9 @@ pipeline{
                 echo "${env.EXIT_STATUS}"
                 echo "java -jar copiloto.jar --spring-config-location=${env.CONFIG_LOCATION}" 
                 echo "secret file - ${SECRET_FILE}"
+                echo "username and password ${TOMCAT_AUTH}"
+                echo "username ${TOMCAT_AUTH_USR}"
+                echo "password ${TOMCAT_AUTH_PSW}"
             }
         }
     }
