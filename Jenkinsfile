@@ -61,13 +61,14 @@ pipeline{
                 )]){
 
                     sh 'ssh -i $SSH_KEY_FILE $SSH_USERNAME@198.211.108.140 ifconfig'
-                    unstash 'copiloto'
+        
                 }
             }
         }
     }
     post{
         always{
+            unstash 'copiloto'
             archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true 
             //junit 'build/test-results/**/*.xml'
 	        //deleteDir() 	
