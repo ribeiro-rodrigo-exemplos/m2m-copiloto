@@ -2,6 +2,8 @@ pipeline{
     agent any
     environment{
         CONFIG_LOCATION="/opt/copiloto/copiloto.yml" 
+        CC = """${sh(returnStdout: true, script:'echo "clang"')}"""
+        EXIT_STATUS="""${sh(returnStatus:true,script:'exit 1')}"""
     } 
     stages{
         stage('Build'){
@@ -31,6 +33,8 @@ pipeline{
                 echo "Realizando build..."
                 echo "${env.LOCAL_ENVIRONMENT}"
                 echo "local do java ${env.JAVA_HOME}"
+                echo "${env.CC}"
+                echo "${env.EXIT_STATUS}"
                 echo "java -jar copiloto.jar --spring-config-location=${env.CONFIG_LOCATION}" 
             }
         }
