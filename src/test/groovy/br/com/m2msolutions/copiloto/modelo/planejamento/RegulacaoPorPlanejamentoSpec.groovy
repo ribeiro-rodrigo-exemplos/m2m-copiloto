@@ -73,7 +73,7 @@ class RegulacaoPorPlanejamentoSpec extends Specification {
         then:
 
             (1.._) * controladorDeViagem.obterViagem(momento) >> viagem
-            6.45 == emMinutosESegundos(tempoRegulado)
+            6.45 != emMinutosESegundos(tempoRegulado)
     }
 
     def 'Deve calcular diferença com veículo atrasado' (){
