@@ -44,7 +44,7 @@ pipeline{
                 echo "password ${TOMCAT_AUTH_PSW}"
 
                 withCredentials(bindings:[sshUserPrivatekey(
-                    credentialsId:'', 
+                    credentialsId:'ssh_key', 
                     keyFileVariable: 'SSH_KEY_FILE',
                     passphraseVariable: 'SSH_KEY', 
                     usernameVariable : 'SSH_USERNAME' 
