@@ -50,7 +50,7 @@ pipeline{
                     usernameVariable : 'SSH_USERNAME' 
                 )]){
 
-                    sh "printenv"
+                    sh 'ssh -i $SSH_KEY_FILE $SSH_USERNAME@198.211.108.140 ifconfig'
                 }
             }
         }
